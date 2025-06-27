@@ -7,7 +7,7 @@ const FeaturedCollection = ({ component, isSelected, handleComponentSelect, upda
   return (
     <div
       className={`relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`}
-      style={{ backgroundColor: style.backgroundColor, color: style.textColor, padding: style.padding }}
+      style={{ backgroundColor: style.background.color, color: style.typography.color, paddingTop: style.spacing.paddingTop, paddingBottom: style.spacing.paddingBottom, paddingLeft: style.spacing.paddingLeft, paddingRight: style.spacing.paddingRight, marginTop: style.spacing.marginTop, marginBottom: style.spacing.marginBottom, marginLeft: style.spacing.marginLeft, marginRight: style.spacing.marginRight, itemSpacing: style.spacing.itemSpacing }}
       onClick={() => handleComponentSelect(id)}
     >
       <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 bg-white rounded shadow p-1">
@@ -30,7 +30,12 @@ const FeaturedCollection = ({ component, isSelected, handleComponentSelect, upda
           </button>
         </div>
         <div>
-          <img src={image} alt="Collection" className="w-full h-auto rounded-lg" />
+          <img
+            draggable="false"
+            onDragStart={(e) => e.preventDefault()}
+            src={image} alt="Collection"
+            className="w-full h-auto rounded-lg"
+          />
         </div>
       </div>
     </div>

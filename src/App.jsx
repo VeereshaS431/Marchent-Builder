@@ -27,38 +27,33 @@ const App = () => {
     const [isPageDropdownOpen, setIsPageDropdownOpen] = useState(false);
     const [selectedComponent, setSelectedComponent] = useState(null);
     const [saveStatus, setSaveStatus] = useState(null);
+
+    const [activePanel, setActivePanel] = useState("typography");
+    const [logo, setLogo] = useState("Your Logo");
+    const [navItems, setNavItems] = useState([
+        { id: 1, text: "Home" },
+        { id: 2, text: "About" },
+        { id: 3, text: "Services" },
+        { id: 4, text: "Contact" },
+    ]);
+
     const [components, setComponents] = useState([
-        {
-            id: 'hero-1',
-            type: 'Hero Banner',
-            name: 'Main Hero',
-            content: {
-                heading: 'Summer Collection 2025',
-                subheading: 'Discover our latest arrivals with premium quality and stunning designs.',
-                buttonText: 'Shop Now',
-                imageUrl: 'https://readdy.ai/api/search-image?query=A%20stylish%20summer%20fashion%20collection%20featuring%20elegant%20clothing%20items%20arranged%20aesthetically%20on%20a%20light%20neutral%20background%2C%20professional%20e-commerce%20photography%20with%20soft%20natural%20lighting%2C%20high-quality%20fabric%20textures%20visible%2C%20modern%20and%20minimalist%20styling&width=600&height=400&seq=5&orientation=landscape',
-            },
-            style: {
-                backgroundColor: '#ffffff',
-                textColor: '#1f2937',
-                padding: '2rem',
-            },
-        },
-        {
-            id: 'featured-1',
-            type: 'Featured Collection',
-            name: 'Summer Collection',
-            content: {
-                heading: 'Summer Collection',
-                subheading: 'Explore our curated selection of summer essentials designed for comfort and style.',
-                imageUrl: 'https://readdy.ai/api/search-image?query=A%20single%20fashionable%20summer%20clothing%20item%20on%20a%20clean%20light%20gray%20background%2C%20professional%20product%20photography%20with%20soft%20shadows%2C%20detailed%20fabric%20texture%20visible%2C%20minimalist%20styling%20for%20e-commerce%20website&width=300&height=300&seq=1&orientation=squarish',
-            },
-            style: {
-                backgroundColor: '#ffffff',
-                textColor: '#1f2937',
-                padding: '2rem',
-            },
-        },
+        // {
+        //     id: 'hero-1',
+        //     type: 'Hero Banner',
+        //     name: 'Main Hero',
+        //     content: {
+        //         heading: 'Summer Collection 2025',
+        //         subheading: 'Discover our latest arrivals with premium quality and stunning designs.',
+        //         buttonText: 'Shop Now',
+        //         imageUrl: 'https://readdy.ai/api/search-image?query=A%20stylish%20summer%20fashion%20collection%20featuring%20elegant%20clothing%20items%20arranged%20aesthetically%20on%20a%20light%20neutral%20background%2C%20professional%20e-commerce%20photography%20with%20soft%20natural%20lighting%2C%20high-quality%20fabric%20textures%20visible%2C%20modern%20and%20minimalist%20styling&width=600&height=400&seq=5&orientation=landscape',
+        //     },
+        //     style: {
+        //         backgroundColor: '#ffffff',
+        //         textColor: '#1f2937',
+        //         padding: '2rem',
+        //     },
+        // },
     ]);
 
     const availableThemes = [
@@ -160,7 +155,42 @@ const App = () => {
                                 },
                             ],
                         },
-                        style: { backgroundColor: '#ffffff', padding: '2rem' },
+                        style: {
+                            typography: {
+                                fontSize: 16,
+                                fontWeight: 400,
+                                color: "#333333",
+                                fontFamily: "Inter, sans-serif",
+                            },
+                            spacing: {
+                                paddingTop: 16,
+                                paddingRight: 24,
+                                paddingBottom: 16,
+                                paddingLeft: 24,
+                                marginTop: 0,
+                                marginRight: 0,
+                                marginBottom: 0,
+                                marginLeft: 0,
+                                itemSpacing: 24,
+                            },
+                            background: {
+                                type: "solid",
+                                color: "#ffffff",
+                                gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
+                                opacity: 100,
+                            },
+                            layout: {
+                                orientation: "horizontal",
+                                alignment: "center",
+                            },
+                            effects: {
+                                borderRadius: 4,
+                                borderWidth: 1,
+                                borderStyle: "solid",
+                                borderColor: "#eeeeee",
+                                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+                            },
+                        }
                     },
                 },
                 {
@@ -175,7 +205,42 @@ const App = () => {
                             buttonText: 'Shop Now',
                             image: 'https://readdy.ai/api/search-image?query=A%20collection%20of%20trendy%20summer%20clothing%20items%20arranged%20aesthetically%20on%20a%20clean%20light%20gray%20background%20professional%20e-commerce%20photography%20with%20soft%20lighting%20modern%20minimal%20styling&width=600&height=400&seq=13&orientation=landscape',
                         },
-                        style: { backgroundColor: '#f8fafc', padding: '2rem' },
+                        style: {
+                            typography: {
+                                fontSize: 16,
+                                fontWeight: 400,
+                                color: "#333333",
+                                fontFamily: "Inter, sans-serif",
+                            },
+                            spacing: {
+                                paddingTop: 16,
+                                paddingRight: 24,
+                                paddingBottom: 16,
+                                paddingLeft: 24,
+                                marginTop: 0,
+                                marginRight: 0,
+                                marginBottom: 0,
+                                marginLeft: 0,
+                                itemSpacing: 24,
+                            },
+                            background: {
+                                type: "solid",
+                                color: "#ffffff",
+                                gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
+                                opacity: 100,
+                            },
+                            layout: {
+                                orientation: "horizontal",
+                                alignment: "center",
+                            },
+                            effects: {
+                                borderRadius: 4,
+                                borderWidth: 1,
+                                borderStyle: "solid",
+                                borderColor: "#eeeeee",
+                                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+                            },
+                        }
                     },
                 },
                 {
@@ -190,8 +255,58 @@ const App = () => {
                             description: 'High-quality cotton t-shirt',
                             image: 'https://readdy.ai/api/search-image?query=A%20premium%20white%20t-shirt%20on%20a%20clean%20light%20gray%20background%20showing%20fabric%20quality%20and%20details%20professional%20product%20photography%20with%20soft%20shadows%20modern%20minimal%20styling&width=300&height=300&seq=14&orientation=squarish',
                         },
-                        style: { backgroundColor: '#ffffff', padding: '1rem' },
+                        style: {
+                            typography: {
+                                fontSize: 16,
+                                fontWeight: 400,
+                                color: "#333333",
+                                fontFamily: "Inter, sans-serif",
+                            },
+                            spacing: {
+                                paddingTop: 16,
+                                paddingRight: 24,
+                                paddingBottom: 16,
+                                paddingLeft: 24,
+                                marginTop: 0,
+                                marginRight: 0,
+                                marginBottom: 0,
+                                marginLeft: 0,
+                                itemSpacing: 24,
+                            },
+                            background: {
+                                type: "solid",
+                                color: "#ffffff",
+                                gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
+                                opacity: 100,
+                            },
+                            layout: {
+                                orientation: "horizontal",
+                                alignment: "center",
+                            },
+                            effects: {
+                                borderRadius: 4,
+                                borderWidth: 1,
+                                borderStyle: "solid",
+                                borderColor: "#eeeeee",
+                                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+                            },
+                        }
                     },
+                },
+                {
+                    type: 'Navbar',
+                    // icon: 'shopping-bag',
+                    // template: {
+                    //     id: `product-card-${Date.now()}`,
+                    //     type: 'Product Card',
+                    //     content: {
+                    //         name: 'Premium T-Shirt',
+                    //         price: '$29.99',
+                    //         description: 'High-quality cotton t-shirt',
+                    //         image: 'https://readdy.ai/api/search-image?query=A%20premium%20white%20t-shirt%20on%20a%20clean%20light%20gray%20background%20showing%20fabric%20quality%20and%20details%20professional%20product%20photography%20with%20soft%20shadows%20modern%20minimal%20styling&width=300&height=300&seq=14&orientation=squarish',
+                    //     },
+                    //     style: { backgroundColor: '#ffffff', padding: '1rem' },
+                    // },
                 },
             ],
         },
@@ -282,8 +397,8 @@ const App = () => {
 
     const canvasComponents = [
         { id: 'hero-1', type: 'Hero Banner', name: 'Main Hero' },
-        { id: 'featured-1', type: 'Featured Collection', name: 'Summer Collection' },
-        { id: 'text-1', type: 'Text Block', name: 'About Section' },
+        // { id: 'featured-1', type: 'Featured Collection', name: 'Summer Collection' },
+        // { id: 'text-1', type: 'Text Block', name: 'About Section' },
     ];
 
     const mockProperties = {
@@ -305,6 +420,46 @@ const App = () => {
     };
 
     const projectName = 'My Fashion Store';
+
+
+    const [styles, setStyles] = useState({
+        typography: {
+            fontSize: 16,
+            fontWeight: 400,
+            color: "#333333",
+            fontFamily: "Inter, sans-serif",
+        },
+        spacing: {
+            paddingTop: 16,
+            paddingRight: 24,
+            paddingBottom: 16,
+            paddingLeft: 24,
+            marginTop: 0,
+            marginRight: 0,
+            marginBottom: 0,
+            marginLeft: 0,
+            itemSpacing: 24,
+        },
+        background: {
+            type: "solid",
+            color: "#ffffff",
+            gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
+            opacity: 100,
+        },
+        layout: {
+            orientation: "horizontal",
+            alignment: "center",
+        },
+        effects: {
+            borderRadius: 4,
+            borderWidth: 1,
+            borderStyle: "solid",
+            borderColor: "#eeeeee",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+        },
+    });
+
+
 
     const handlePageSelect = (pageName) => {
         setCurrentPage(pageName);
@@ -452,6 +607,121 @@ const App = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
+
+    // const updateStyle = (category, property, value) => {
+    //     setStyles({
+    //         ...styles,
+    //         [category]: {
+    //             ...styles[category],
+    //             [property]: value,
+    //         },
+    //     });
+    // };
+
+
+    const updateStyle = (category, property, value) => {
+        console.log(`Updating style: ${category} > ${property} = ${value}`);
+
+        const selectedComponents = components.find((comp) => comp.id === selectedComponent);
+        if (!selectedComponents) {
+            console.error('Selected component not found');
+            return;
+        }
+
+        setComponents((prevCards) =>
+            prevCards.map((card) =>
+                card.id === selectedComponent
+                    ? {
+                        ...card,
+                        style: {
+                            ...card.style,
+                            [category]: {
+                                ...card.style[category],
+                                [property]: value
+                            }
+                        }
+                    }
+                    : card
+            )
+        );
+    };
+
+
+    const getNavbarStyle = () => {
+        const { typography, spacing, background, layout, effects } = styles;
+        return {
+            display: "flex",
+            flexDirection: layout.orientation === "horizontal" ? "row" : "column",
+            alignItems: layout.orientation === "horizontal" ? "center" : "flex-start",
+            justifyContent:
+                layout.alignment === "start"
+                    ? "flex-start"
+                    : layout.alignment === "end"
+                        ? "flex-end"
+                        : "center",
+            backgroundColor:
+                background.type === "solid" ? background.color : "transparent",
+            backgroundImage:
+                background.type === "gradient" ? background.gradient : "none",
+            opacity: background.opacity / 100,
+            paddingTop: `${spacing.paddingTop}px`,
+            paddingRight: `${spacing.paddingRight}px`,
+            paddingBottom: `${spacing.paddingBottom}px`,
+            paddingLeft: `${spacing.paddingLeft}px`,
+            marginTop: `${spacing.marginTop}px`,
+            marginRight: `${spacing.marginRight}px`,
+            marginBottom: `${spacing.marginBottom}px`,
+            marginLeft: `${spacing.marginLeft}px`,
+            borderRadius: `${effects.borderRadius}px`,
+            borderWidth: `${effects.borderWidth}px`,
+            borderStyle: effects.borderStyle,
+            borderColor: effects.borderColor,
+            boxShadow: effects.boxShadow,
+            fontFamily: typography.fontFamily,
+            width:
+                previewMode === "mobile" ? "100%" : previewMode === "tablet" ? "768px" : "100%",
+            maxWidth: "100%",
+        };
+    };
+
+    const getNavItemStyle = () => {
+        const { typography, spacing, layout } = styles;
+        return {
+            color: typography.color,
+            fontSize: `${typography.fontSize}px`,
+            fontWeight: typography.fontWeight,
+            padding: "8px 12px",
+            cursor: "pointer",
+            marginRight:
+                layout.orientation === "horizontal" ? `${spacing.itemSpacing}px` : "0",
+            marginBottom:
+                layout.orientation === "vertical" ? `${spacing.itemSpacing}px` : "0",
+            position: "relative",
+            transition: "all 0.2s ease",
+        };
+    };
+
+    console.log("selectedComponent", selectedComponent);
+
+
+    // const updateStyle = (property, value) => {
+    //     setProductGrid((prevGrid) => ({
+    //         ...prevGrid,
+    //         style: {
+    //             ...prevGrid.style,
+    //             [property]: value
+    //         }
+    //     }));
+    // };
+
+    // Example usage within the component
+    // const handleStyleChange = (property, value) => {
+    //     updateStyle(property, value);
+    // };
+
+
+
+
     return (
         <div className="flex flex-col h-screen bg-gray-50">
             <Navbar
@@ -492,6 +762,10 @@ const App = () => {
                         handleComponentSelect={handleComponentSelect}
                         selectedComponent={selectedComponent}
                         updateComponentContent={updateComponentContent}
+                        logo={logo}
+                        navItems={navItems}
+                        getNavbarStyle={getNavbarStyle}
+                        getNavItemStyle={getNavItemStyle}
                     />
                     {showPropertiesPanel && selectedComponent && (
                         <PropertiesPanel
@@ -503,6 +777,10 @@ const App = () => {
                             updateComponentStyle={updateComponentStyle}
                             handlePropertyChange={handlePropertyChange}
                             setShowPropertiesPanel={setShowPropertiesPanel}
+                            styles={styles}
+                            activePanel={activePanel}
+                            setActivePanel={setActivePanel}
+                            updateStyle={updateStyle}
                         />
                     )}
                 </div>
@@ -529,3 +807,259 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import Sidebar from "./Sidebar.jsx";
+// import LivePreview from "./LivePreview.jsx";
+
+// const App = () => {
+//     const [logo, setLogo] = useState("Your Logo");
+//     const [navItems, setNavItems] = useState([
+//         { id: 1, text: "Home" },
+//         { id: 2, text: "About" },
+//         { id: 3, text: "Services" },
+//         { id: 4, text: "Contact" },
+//     ]);
+//     const [isLoggedIn, setIsLoggedIn] = useState(false);
+//     const [editingItemId, setEditingItemId] = useState(null);
+//     const [editText, setEditText] = useState("");
+//     const [device, setDevice] = useState("desktop");
+//     const [activePanel, setActivePanel] = useState("typography");
+//     const [jsonPanelOpen, setJsonPanelOpen] = useState(true);
+//     const [styles, setStyles] = useState({
+//         typography: {
+//             fontSize: 16,
+//             fontWeight: 400,
+//             color: "#333333",
+//             fontFamily: "Inter, sans-serif",
+//         },
+//         spacing: {
+//             paddingTop: 16,
+//             paddingRight: 24,
+//             paddingBottom: 16,
+//             paddingLeft: 24,
+//             marginTop: 0,
+//             marginRight: 0,
+//             marginBottom: 0,
+//             marginLeft: 0,
+//             itemSpacing: 24,
+//         },
+//         background: {
+//             type: "solid",
+//             color: "#ffffff",
+//             gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
+//             opacity: 100,
+//         },
+//         layout: {
+//             orientation: "horizontal",
+//             alignment: "center",
+//         },
+//         effects: {
+//             borderRadius: 4,
+//             borderWidth: 1,
+//             borderStyle: "solid",
+//             borderColor: "#eeeeee",
+//             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+//         },
+//     });
+
+//     const handleItemClick = (id, text) => {
+//         setEditingItemId(id);
+//         setEditText(text);
+//     };
+
+//     const handleInputChange = (e) => {
+//         setEditText(e.target.value);
+//     };
+
+//     const handleInputBlur = () => {
+//         if (editingItemId !== null) {
+//             if (editingItemId === "logo") {
+//                 setLogo(editText);
+//             } else {
+//                 setNavItems(
+//                     navItems.map((item) =>
+//                         item.id === editingItemId ? { ...item, text: editText } : item
+//                     )
+//                 );
+//             }
+//             setEditingItemId(null);
+//         }
+//     };
+
+//     const handleInputKeyDown = (e) => {
+//         if (e.key === "Enter") {
+//             handleInputBlur();
+//         }
+//     };
+
+//     const updateStyle = (category, property, value) => {
+//         setStyles({
+//             ...styles,
+//             [category]: {
+//                 ...styles[category],
+//                 [property]: value,
+//             },
+//         });
+//     };
+
+//     const getNavbarStyle = () => {
+//         const { typography, spacing, background, layout, effects } = styles;
+//         return {
+//             display: "flex",
+//             flexDirection: layout.orientation === "horizontal" ? "row" : "column",
+//             alignItems: layout.orientation === "horizontal" ? "center" : "flex-start",
+//             justifyContent:
+//                 layout.alignment === "start"
+//                     ? "flex-start"
+//                     : layout.alignment === "end"
+//                         ? "flex-end"
+//                         : "center",
+//             backgroundColor:
+//                 background.type === "solid" ? background.color : "transparent",
+//             backgroundImage:
+//                 background.type === "gradient" ? background.gradient : "none",
+//             opacity: background.opacity / 100,
+//             paddingTop: `${spacing.paddingTop}px`,
+//             paddingRight: `${spacing.paddingRight}px`,
+//             paddingBottom: `${spacing.paddingBottom}px`,
+//             paddingLeft: `${spacing.paddingLeft}px`,
+//             marginTop: `${spacing.marginTop}px`,
+//             marginRight: `${spacing.marginRight}px`,
+//             marginBottom: `${spacing.marginBottom}px`,
+//             marginLeft: `${spacing.marginLeft}px`,
+//             borderRadius: `${effects.borderRadius}px`,
+//             borderWidth: `${effects.borderWidth}px`,
+//             borderStyle: effects.borderStyle,
+//             borderColor: effects.borderColor,
+//             boxShadow: effects.boxShadow,
+//             fontFamily: typography.fontFamily,
+//             width:
+//                 device === "mobile" ? "100%" : device === "tablet" ? "768px" : "100%",
+//             maxWidth: "100%",
+//         };
+//     };
+
+//     const getNavItemStyle = () => {
+//         const { typography, spacing, layout } = styles;
+//         return {
+//             color: typography.color,
+//             fontSize: `${typography.fontSize}px`,
+//             fontWeight: typography.fontWeight,
+//             padding: "8px 12px",
+//             cursor: "pointer",
+//             marginRight:
+//                 layout.orientation === "horizontal" ? `${spacing.itemSpacing}px` : "0",
+//             marginBottom:
+//                 layout.orientation === "vertical" ? `${spacing.itemSpacing}px` : "0",
+//             position: "relative",
+//             transition: "all 0.2s ease",
+//         };
+//     };
+
+//     const getDevicePreviewStyle = () => {
+//         switch (device) {
+//             case "mobile":
+//                 return { maxWidth: "375px" };
+//             case "tablet":
+//                 return { maxWidth: "768px" };
+//             default:
+//                 return { maxWidth: "100%" };
+//         }
+//     };
+
+//     const getConfigJSON = () => {
+//         return JSON.stringify(
+//             {
+//                 navItems: navItems.map((item) => ({ text: item.text })),
+//                 styles,
+//             },
+//             null,
+//             2
+//         );
+//     };
+
+//     const exportJSON = () => {
+//         const dataStr =
+//             "data:text/json;charset=utf-8," + encodeURIComponent(getConfigJSON());
+//         const downloadAnchorNode = document.createElement("a");
+//         downloadAnchorNode.setAttribute("href", dataStr);
+//         downloadAnchorNode.setAttribute("download", "navbar-config.json");
+//         document.body.appendChild(downloadAnchorNode);
+//         downloadAnchorNode.click();
+//         downloadAnchorNode.remove();
+//     };
+
+//     return (
+//         <div className="flex flex-col min-h-screen bg-gray-50">
+//             <header className="bg-white border-b border-gray-200 py-4 px-6 flex items-center justify-between">
+//                 <h1 className="text-xl font-semibold text-gray-800">Navbar Builder</h1>
+//                 <div className="flex items-center space-x-4">
+//                     <div className="flex items-center bg-gray-100 rounded-lg p-1">
+//                         <button
+//                             onClick={() => setDevice("desktop")}
+//                             className={`p-2 rounded-md ${device === "desktop" ? "bg-white shadow-sm" : ""}`}
+//                         >
+//                             <i className="fas fa-desktop text-gray-600"></i>
+//                         </button>
+//                         <button
+//                             onClick={() => setDevice("tablet")}
+//                             className={`p-2 rounded-md ${device === "tablet" ? "bg-white shadow-sm" : ""}`}
+//                         >
+//                             <i className="fas fa-tablet-alt text-gray-600"></i>
+//                         </button>
+//                         <button
+//                             onClick={() => setDevice("mobile")}
+//                             className={`p-2 rounded-md ${device === "mobile" ? "bg-white shadow-sm" : ""}`}
+//                         >
+//                             <i className="fas fa-mobile-alt text-gray-600"></i>
+//                         </button>
+//                     </div>
+//                     <button
+//                         onClick={exportJSON}
+//                         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg !rounded-button whitespace-nowrap flex items-center cursor-pointer"
+//                     >
+//                         <i className="fas fa-download mr-2"></i>
+//                         Export JSON
+//                     </button>
+//                 </div>
+//             </header>
+//             <div className="flex flex-1 overflow-hidden">
+//                 <Sidebar
+//                     styles={styles}
+//                     activePanel={activePanel}
+//                     setActivePanel={setActivePanel}
+//                     updateStyle={updateStyle}
+//                 />
+//                 <LivePreview
+//                     logo={logo}
+//                     navItems={navItems}
+//                     isLoggedIn={isLoggedIn}
+//                     editingItemId={editingItemId}
+//                     editText={editText}
+//                     device={device}
+//                     styles={styles}
+//                     jsonPanelOpen={jsonPanelOpen}
+//                     setJsonPanelOpen={setJsonPanelOpen}
+//                     handleItemClick={handleItemClick}
+//                     handleInputChange={handleInputChange}
+//                     handleInputBlur={handleInputBlur}
+//                     handleInputKeyDown={handleInputKeyDown}
+//                     getNavbarStyle={getNavbarStyle}
+//                     getNavItemStyle={getNavItemStyle}
+//                     getDevicePreviewStyle={getDevicePreviewStyle}
+//                     getConfigJSON={getConfigJSON}
+//                     exportJSON={exportJSON}
+//                 />
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default App;

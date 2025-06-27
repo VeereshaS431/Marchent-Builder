@@ -30,6 +30,8 @@ const ProductGrid = ({ component, isSelected, handleComponentSelect, updateCompo
                 <img
                   src={product.image}
                   alt={product.name}
+                  draggable="false"
+                  onDragStart={(e) => e.preventDefault()}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
