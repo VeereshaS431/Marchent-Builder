@@ -3,6 +3,7 @@ import HeroBanner from './HeroBanner';
 import ProductGrid from './ProductGrid';
 import FeaturedCollection from './FeaturedCollection';
 import ProductCard from './ProductCard';
+import NavbarSection from '../sections/NavbarSection';
 
 const Canvas = ({
   showComponentPanel,
@@ -17,7 +18,13 @@ const Canvas = ({
   handleComponentSelect,
   selectedComponent,
   updateComponentContent,
+  logo,
+  navItems,
+  getNavbarStyle,
+  getNavItemStyle,
 }) => {
+
+  console.log('Canvas components:', components);
   return (
     <div className="flex-1 flex flex-col bg-gray-100 overflow-hidden">
       {!showComponentPanel && (
@@ -57,9 +64,8 @@ const Canvas = ({
       </div>
       <div className="flex-1 overflow-y-auto p-6" onDrop={handleDrop} onDragOver={handleDragOver}>
         <div
-          className={`mx-auto bg-white shadow-sm rounded-lg transition-all ${
-            previewMode === 'desktop' ? 'max-w-full' : previewMode === 'tablet' ? 'max-w-2xl' : 'max-w-sm'
-          }`}
+          className={`mx-auto bg-gray-100 rounded-lg transition-all ${previewMode === 'desktop' ? 'max-w-full' : previewMode === 'tablet' ? 'max-w-2xl' : 'max-w-sm'
+            }`}
         >
           {canvasComponents.length === 0 ? (
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
@@ -80,52 +86,92 @@ const Canvas = ({
                 switch (component.type) {
                   case 'Hero Banner':
                     return (
-                      <HeroBanner
-                        key={component.id}
-                        component={component}
-                        isSelected={selectedComponent === component.id}
-                        handleComponentSelect={handleComponentSelect}
-                        updateComponentContent={updateComponentContent}
-                      />
+                      <div className='mb-4'>
+                        <HeroBanner
+                          key={component.id}
+                          component={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          updateComponentContent={updateComponentContent}
+                        />
+                      </div>
                     );
                   case 'Product Grid':
                     return (
-                      <ProductGrid
-                        key={component.id}
-                        component={component}
-                        isSelected={selectedComponent === component.id}
-                        handleComponentSelect={handleComponentSelect}
-                        updateComponentContent={updateComponentContent}
-                      />
+                      <div className='mb-4'>
+                        <ProductGrid
+                          key={component.id}
+                          component={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          updateComponentContent={updateComponentContent}
+                        />
+                      </div>
                     );
                   case 'Featured Collection':
                     return (
-                      <FeaturedCollection
-                        key={component.id}
-                        component={component}
-                        isSelected={selectedComponent === component.id}
-                        handleComponentSelect={handleComponentSelect}
-                        updateComponentContent={updateComponentContent}
-                      />
+                      <div className='mb-4'>
+                        <FeaturedCollection
+                          key={component.id}
+                          component={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          updateComponentContent={updateComponentContent}
+                        />
+                      </div>
                     );
                   case 'Product Card':
                     return (
-                      <ProductCard
-                        key={component.id}
-                        component={component}
-                        isSelected={selectedComponent === component.id}
-                        handleComponentSelect={handleComponentSelect}
-                        updateComponentContent={updateComponentContent}
-                      />
+                      <div className='mb-4'>
+                        <ProductCard
+                          key={component.id}
+                          component={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
+
+                  case 'Navbar':
+                    return (
+                      <div className='mb-4'>
+                        <NavbarSection
+                          logo={logo}
+                          navItems={navItems}
+                          getNavbarStyle={getNavbarStyle}
+                          getNavItemStyle={getNavItemStyle}
+                          key={component.id}
+                        />
+                      </div>
                     );
                   default:
                     return null;
                 }
               })}
-              <div
-                className={`relative p-8 ${
-                  selectedComponent === 'featured-1' ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'
-                }`}
+              {/* <NavbarSection
+                logo={logo}
+                navItems={navItems}
+                getNavbarStyle={getNavbarStyle}
+                getNavItemStyle={getNavItemStyle}
+              /> */}
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center" >
+                <div className="mx-auto h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <i className="fas fa-plus text-gray-400 text-xl"></i>
+                </div>
+                <h3 className="text-lg font-medium text-gray-700 mb-2">Add your first component</h3>
+                <p className="text-gray-500 mb-4">
+                  Drag and drop components from the left panel to start building your page
+                </p>
+                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer !rounded-button whitespace-nowrap">
+                  <i className="fas fa-plus mr-2"></i>Add Component
+                </button>
+              </div>
+
+              {/* featured collection component */}
+              {/* <div
+                className={`relative p-8 ${selectedComponent === 'featured-1' ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'
+                  }`}
                 onClick={() => handleComponentSelect('featured-1')}
               >
                 <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 bg-white rounded shadow p-1">
@@ -163,11 +209,12 @@ const Canvas = ({
                     </div>
                   ))}
                 </div>
-              </div>
-              <div
-                className={`relative p-8 ${
-                  selectedComponent === 'text-1' ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'
-                }`}
+              </div> */}
+
+              {/* about us component */}
+              {/* <div
+                className={`relative p-8 ${selectedComponent === 'text-1' ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'
+                  }`}
                 onClick={() => handleComponentSelect('text-1')}
               >
                 <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 bg-white rounded shadow p-1">
@@ -193,7 +240,7 @@ const Canvas = ({
                     Learn More About Us
                   </button>
                 </div>
-              </div>
+              </div> */}
             </>
           )}
         </div>
