@@ -9,8 +9,15 @@ const PropertiesPanel = ({
   // updateComponentStyle,
   // handlePropertyChange,
   setShowPropertiesPanel,
+  handleDeletecomponent,
   styles, activePanel, setActivePanel, updateStyle
 }) => {
+
+  console.log("PropertiesPanel", components.find((c) => c.id === selectedComponent));
+
+  const selected = components.find((c) => c.id === selectedComponent);
+  console.log("Selected Component", selected.style.background.type);
+
   return (
     <div className="w-80 bg-white border-l border-gray-200 flex flex-col">
       <div className="p-4 border-b border-gray-200 flex justify-between items-center">
@@ -58,7 +65,7 @@ const PropertiesPanel = ({
 
 
 
-        <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
+        <div className=" bg-white border-r border-gray-200 overflow-y-auto">
           <div className="p-4">
             <h2 className="text-lg font-medium text-gray-800 mb-4">
               Navbar Settings
@@ -122,7 +129,7 @@ const PropertiesPanel = ({
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Font Weight
                       </label>
-                      <div className="flex space-x-2">
+                      <div className="flex flex-wrap align-center gap-2">
                         {[300, 400, 500, 600, 700].map((weight) => (
                           <button
                             key={weight}
@@ -372,20 +379,21 @@ const PropertiesPanel = ({
                       </label>
                       <div className="flex space-x-2">
                         <button
-                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.styles?.background?.type === "solid" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
+                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.style?.background?.type === "solid" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
                           onClick={() => updateStyle("background", "type", "solid")}
                         >
                           Solid
                         </button>
                         <button
-                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.styles?.background?.type === "gradient" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
+                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.style?.background?.type === "gradient" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
                           onClick={() => updateStyle("background", "type", "gradient")}
                         >
                           Gradient
                         </button>
                       </div>
                     </div>
-                    {components.find((c) => c.id === selectedComponent)?.styles?.background?.type === "solid" ? (
+                    {/* {components.find((c) => c.id === selectedComponent)?.style?.background?.type === "solid" ? ( */}
+                    {selected?.style?.background?.type == "solid" ? (
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                           Color
@@ -394,7 +402,7 @@ const PropertiesPanel = ({
                           <div className="w-10 h-10 rounded-md border border-gray-300 overflow-hidden mr-2">
                             <input
                               type="color"
-                              value={components.find((c) => c.id === selectedComponent)?.styles?.background?.color}
+                              value={components.find((c) => c.id === selectedComponent)?.style?.background?.color}
                               onChange={(e) =>
                                 updateStyle("background", "color", e.target.value)
                               }
@@ -403,7 +411,7 @@ const PropertiesPanel = ({
                           </div>
                           <input
                             type="text"
-                            value={components.find((c) => c.id === selectedComponent)?.styles?.background?.color}
+                            value={components.find((c) => c.id === selectedComponent)?.style?.background?.color}
                             onChange={(e) =>
                               updateStyle("background", "color", e.target.value)
                             }
@@ -418,7 +426,7 @@ const PropertiesPanel = ({
                         </label>
                         <select
                           className="w-full border border-gray-300 rounded-md px-3 py-2 mb-2"
-                          value={components.find((c) => c.id === selectedComponent)?.styles?.background?.gradient}
+                          value={components.find((c) => c.id === selectedComponent)?.style?.background?.gradient}
                           onChange={(e) =>
                             updateStyle("background", "gradient", e.target.value)
                           }
@@ -443,13 +451,13 @@ const PropertiesPanel = ({
                     )}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Opacity: {components.find((c) => c.id === selectedComponent)?.styles?.background?.opacity}%
+                        Opacity: {components.find((c) => c.id === selectedComponent)?.style?.background?.opacity}%
                       </label>
                       <input
                         type="range"
                         min="0"
                         max="100"
-                        value={components.find((c) => c.id === selectedComponent)?.styles?.background?.opacity || 100}
+                        value={components.find((c) => c.id === selectedComponent)?.style?.background?.opacity || 100}
                         onChange={(e) =>
                           updateStyle(
                             "background",
@@ -484,7 +492,7 @@ const PropertiesPanel = ({
                       </label>
                       <div className="flex space-x-2">
                         <button
-                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.styles?.layout?.orientation === "horizontal" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
+                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.style?.layout?.orientation === "horizontal" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
                           onClick={() =>
                             updateStyle("layout", "orientation", "horizontal")
                           }
@@ -493,7 +501,7 @@ const PropertiesPanel = ({
                           Horizontal
                         </button>
                         <button
-                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.styles?.layout?.orientation === "vertical" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
+                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.style?.layout?.orientation === "vertical" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
                           onClick={() =>
                             updateStyle("layout", "orientation", "vertical")
                           }
@@ -509,21 +517,21 @@ const PropertiesPanel = ({
                       </label>
                       <div className="flex space-x-2">
                         <button
-                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.styles?.layout?.alignment === "start" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
+                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.style?.layout?.alignment === "start" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
                           onClick={() => updateStyle("layout", "alignment", "start")}
                         >
                           <i className="fas fa-align-left mr-1"></i>
                           Start
                         </button>
                         <button
-                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.styles?.layout?.alignment === "center" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
+                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.style?.layout?.alignment === "center" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
                           onClick={() => updateStyle("layout", "alignment", "center")}
                         >
                           <i className="fas fa-align-center mr-1"></i>
                           Center
                         </button>
                         <button
-                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.styles?.layout?.alignment === "end" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
+                          className={`px-3 py-1 border ${components.find((c) => c.id === selectedComponent)?.style?.layout?.alignment === "end" ? "bg-gray-100 border-gray-400" : "border-gray-300"} rounded-md text-sm cursor-pointer whitespace-nowrap !rounded-button`}
                           onClick={() => updateStyle("layout", "alignment", "end")}
                         >
                           <i className="fas fa-align-right mr-1"></i>
@@ -551,13 +559,13 @@ const PropertiesPanel = ({
                   <div className="p-4 border-t border-gray-200 space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Border Radius: {components.find((c) => c.id === selectedComponent)?.styles?.effects?.borderRadius}px
+                        Border Radius: {components.find((c) => c.id === selectedComponent)?.style?.effects?.borderRadius}px
                       </label>
                       <input
                         type="range"
                         min="0"
                         max="24"
-                        value={components.find((c) => c.id === selectedComponent)?.styles?.effects?.borderRadius}
+                        value={components.find((c) => c.id === selectedComponent)?.style?.effects?.borderRadius}
                         onChange={(e) =>
                           updateStyle(
                             "effects",
@@ -581,7 +589,7 @@ const PropertiesPanel = ({
                             type="number"
                             min="0"
                             max="10"
-                            value={components.find((c) => c.id === selectedComponent)?.styles?.effects?.borderWidth}
+                            value={components.find((c) => c.id === selectedComponent)?.style?.effects?.borderWidth}
                             onChange={(e) =>
                               updateStyle(
                                 "effects",
@@ -598,7 +606,7 @@ const PropertiesPanel = ({
                           </label>
                           <select
                             className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
-                            value={components.find((c) => c.id === selectedComponent)?.styles?.effects?.borderStyle}
+                            value={components.find((c) => c.id === selectedComponent)?.style?.effects?.borderStyle}
                             onChange={(e) =>
                               updateStyle("effects", "borderStyle", e.target.value)
                             }
@@ -617,7 +625,7 @@ const PropertiesPanel = ({
                             <div className="w-8 h-8 rounded-md border border-gray-300 overflow-hidden">
                               <input
                                 type="color"
-                                value={components.find((c) => c.id === selectedComponent)?.styles?.effects?.borderColor}
+                                value={components.find((c) => c.id === selectedComponent)?.style?.effects?.borderColor}
                                 onChange={(e) =>
                                   updateStyle("effects", "borderColor", e.target.value)
                                 }
@@ -634,7 +642,7 @@ const PropertiesPanel = ({
                       </label>
                       <select
                         className="w-full border border-gray-300 rounded-md px-3 py-2"
-                        value={components.find((c) => c.id === selectedComponent)?.styles?.effects?.boxShadow}
+                        value={components.find((c) => c.id === selectedComponent)?.style?.effects?.boxShadow}
                         onChange={(e) =>
                           updateStyle("effects", "boxShadow", e.target.value)
                         }
@@ -663,7 +671,7 @@ const PropertiesPanel = ({
 
       </div>
       <div className="p-4 border-t border-gray-200">
-        <button className="w-full py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-md text-sm font-medium cursor-pointer !rounded-button whitespace-nowrap">
+        <button onClick={() => handleDeletecomponent(selectedComponent)} className="w-full py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-md text-sm font-medium cursor-pointer !rounded-button whitespace-nowrap">
           <i className="fas fa-trash mr-2"></i>Delete Component
         </button>
       </div>

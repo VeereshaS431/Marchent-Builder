@@ -719,6 +719,18 @@ const App = () => {
     //     updateStyle(property, value);
     // };
 
+    const handleDeletecomponent = (id) => {
+        setComponents((prevComponents) =>
+            prevComponents.filter((component) => component.id !== id)
+        );
+        setSelectedComponent(null);
+        setSaveStatus('saving');
+        setTimeout(() => {
+            setSaveStatus('saved');
+            setTimeout(() => setSaveStatus(null), 2000);
+        }, 1000);
+    }
+
 
 
 
@@ -781,6 +793,7 @@ const App = () => {
                             activePanel={activePanel}
                             setActivePanel={setActivePanel}
                             updateStyle={updateStyle}
+                            handleDeletecomponent={handleDeletecomponent}
                         />
                     )}
                 </div>
