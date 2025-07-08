@@ -55,6 +55,7 @@ const MOCK_INITIAL_DATA = {
     url: "/pages/contact",
   },
 };
+
 const footer_mock_data = {
   id: "footer-section-456",
   component: "Footer",

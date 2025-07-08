@@ -42,12 +42,12 @@ const SelectInput = ({ label, name, value, onChange, options = [] }) => (
 );
 
 
-export function FeaturedCollectionEditor({ data, onUpdate }) {
+export function FeaturedCollectionEditor({ data, components, onUpdate }) {
   const styles = data.styles || {};
 
   const handleStyleChange = (e, section) => {
     const { name, value } = e.target;
-    onUpdate({
+    const update = {
       ...data,
       styles: {
         ...data.styles,
@@ -56,15 +56,31 @@ export function FeaturedCollectionEditor({ data, onUpdate }) {
           [name]: value,
         },
       },
+    }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   const handleTextChange = (e) => {
     const { name, value } = e.target;
-    onUpdate({
+    const update = {
       ...data,
       [name]: value,
+    };
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   return (

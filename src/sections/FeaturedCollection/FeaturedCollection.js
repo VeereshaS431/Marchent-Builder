@@ -1,11 +1,12 @@
 import React from 'react';
 
-export function FeaturedCollection({ data }) {
+export function FeaturedCollection({ data, isSelected, handleComponentSelect }) {
   const {
     title = '',
     description = '',
     products = [],
     styles = {},
+    id,
   } = data || {};
 
   const {
@@ -24,6 +25,8 @@ export function FeaturedCollection({ data }) {
         backgroundColor: container.backgroundColor,
         padding: `${container.paddingY || 64}px ${container.paddingX || 24}px`,
       }}
+      className={`relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`}
+      onClick={() => handleComponentSelect(id)}
     >
       <div className="max-w-7xl mx-auto text-center">
         <h2 style={{

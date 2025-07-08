@@ -40,32 +40,59 @@ const SelectInput = ({ label, name, value, onChange, options = [] }) => (
 
 // --- The Main Editor Component ---
 
-export function FooterEditor({ data, onUpdate }) {
+export function FooterEditor({ data, components, onUpdate }) {
   // --- Handlers for Updating State ---
 
   const handleStyleChange = (e, element) => {
     const { name, value } = e.target;
-    onUpdate({
+    const update = {
       ...data,
       styles: {
         ...data.styles,
         [element]: { ...data.styles[element], [name]: value },
       },
+    }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   const handleColumnChange = (e, colIndex) => {
     const { name, value } = e.target;
     const updatedColumns = [...data.columns];
     updatedColumns[colIndex] = { ...updatedColumns[colIndex], [name]: value };
-    onUpdate({ ...data, columns: updatedColumns });
+
+    const update = { ...data, columns: updatedColumns }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
+    });
+    onUpdate(updatedComponents);
   };
-  
+
   const handleLogoChange = (e, colIndex) => {
     const { name, value } = e.target;
     const updatedColumns = [...data.columns];
     updatedColumns[colIndex].logo = { ...updatedColumns[colIndex].logo, [name]: value };
-    onUpdate({ ...data, columns: updatedColumns });
+
+    const update = { ...data, columns: updatedColumns }
+
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
+    });
+    onUpdate(updatedComponents);
   };
 
   const handleColumnLinkChange = (e, colIndex, linkIndex) => {
@@ -75,13 +102,33 @@ export function FooterEditor({ data, onUpdate }) {
       ...updatedColumns[colIndex].links[linkIndex],
       [name]: value,
     };
-    onUpdate({ ...data, columns: updatedColumns });
+
+    const update = { ...data, columns: updatedColumns };
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
+    });
+    onUpdate(updatedComponents);
   };
-  
+
   const handleCopyrightChange = (e) => {
-    onUpdate({ ...data, copyright: { ...data.copyright, text: e.target.value } });
+    // onUpdate({ ...data, copyright: { ...data.copyright, text: e.target.value } });
+
+    const update = { ...data, copyright: { ...data.copyright, text: e.target.value } };
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
+    }
+    );
+    onUpdate(updatedComponents);
   };
-  
+
   // Safely destructure styles to prevent errors
   const styles = data.styles || {};
 
@@ -100,8 +147,8 @@ export function FooterEditor({ data, onUpdate }) {
                 <StyleInput label="Logo Width" type="number" name="width" unit="px" value={column.logo?.width} onChange={(e) => handleLogoChange(e, colIndex)} />
                 <StyleInput label="Logo Margin Bottom" type="number" name="marginBottom" unit="px" value={column.logo?.marginBottom} onChange={(e) => handleLogoChange(e, colIndex)} />
                 <div>
-                    <label className="block text-sm font-medium">Description Text</label>
-                    <textarea name="text" value={column.text} onChange={(e) => handleColumnChange(e, colIndex)} className="w-full p-1 border rounded" rows="3"/>
+                  <label className="block text-sm font-medium">Description Text</label>
+                  <textarea name="text" value={column.text} onChange={(e) => handleColumnChange(e, colIndex)} className="w-full p-1 border rounded" rows="3" />
                 </div>
               </>
             )}
@@ -122,8 +169,8 @@ export function FooterEditor({ data, onUpdate }) {
           </div>
         ))}
         <div className="border-t pt-4">
-            <h4 className="font-semibold text-gray-600">Copyright</h4>
-            <input type="text" value={data.copyright.text} onChange={handleCopyrightChange} className="w-full p-1 border rounded" />
+          <h4 className="font-semibold text-gray-600">Copyright</h4>
+          <input type="text" value={data.copyright.text} onChange={handleCopyrightChange} className="w-full p-1 border rounded" />
         </div>
       </fieldset>
 
@@ -137,7 +184,7 @@ export function FooterEditor({ data, onUpdate }) {
         </div>
         <StyleInput label="Gap Between Columns" type="number" name="gridGap" value={styles.columnsWrapper?.gridGap} onChange={(e) => handleStyleChange(e, 'columnsWrapper')} unit="px" />
       </fieldset>
-      
+
       {/* --- Section 3: Typography --- */}
       <fieldset className="space-y-4 border p-4 rounded-md">
         <legend className="text-lg font-medium">Typography</legend>
@@ -145,8 +192,8 @@ export function FooterEditor({ data, onUpdate }) {
           <h4 className="font-semibold text-gray-600">Column Headings</h4>
           <StyleInput label="Color" type="color" name="color" value={styles.columnHeading?.color} onChange={(e) => handleStyleChange(e, 'columnHeading')} />
           <StyleInput label="Font Size" type="number" name="fontSize" unit="px" value={styles.columnHeading?.fontSize} onChange={(e) => handleStyleChange(e, 'columnHeading')} />
-          <SelectInput label="Font Weight" name="fontWeight" value={styles.columnHeading?.fontWeight} onChange={(e) => handleStyleChange(e, 'columnHeading')} options={[{value: "400", label: "Normal"}, {value: "600", label: "Semi-Bold"}, {value: "700", label: "Bold"}]} />
-          <SelectInput label="Text Transform" name="textTransform" value={styles.columnHeading?.textTransform} onChange={(e) => handleStyleChange(e, 'columnHeading')} options={[{value: "none", label: "None"}, {value: "uppercase", label: "Uppercase"}]} />
+          <SelectInput label="Font Weight" name="fontWeight" value={styles.columnHeading?.fontWeight} onChange={(e) => handleStyleChange(e, 'columnHeading')} options={[{ value: "400", label: "Normal" }, { value: "600", label: "Semi-Bold" }, { value: "700", label: "Bold" }]} />
+          <SelectInput label="Text Transform" name="textTransform" value={styles.columnHeading?.textTransform} onChange={(e) => handleStyleChange(e, 'columnHeading')} options={[{ value: "none", label: "None" }, { value: "uppercase", label: "Uppercase" }]} />
           <StyleInput label="Margin Bottom" type="number" name="marginBottom" unit="px" value={styles.columnHeading?.marginBottom} onChange={(e) => handleStyleChange(e, 'columnHeading')} />
         </div>
         <div className="space-y-2 border-t pt-4">
@@ -167,20 +214,20 @@ export function FooterEditor({ data, onUpdate }) {
           <StyleInput label="Color" type="color" name="borderTopColor" value={styles.bottomSection?.borderTopColor} onChange={(e) => handleStyleChange(e, 'bottomSection')} />
         </div>
         <div className="border-t pt-4 space-y-2">
-            <h4 className="font-semibold text-gray-600">Layout</h4>
-            <SelectInput label="Direction" name="flexDirection" value={styles.bottomSection?.flexDirection} onChange={(e) => handleStyleChange(e, 'bottomSection')} options={[{value: 'row', label: 'Row'}, {value: 'column', label: 'Column'}]} />
-            <SelectInput label="Justify Content" name="justifyContent" value={styles.bottomSection?.justifyContent} onChange={(e) => handleStyleChange(e, 'bottomSection')} options={[{value: 'space-between', label: 'Space Between'}, {value: 'center', label: 'Center'}, {value: 'flex-start', label: 'Start'}]} />
-        </div>
-         <div className="border-t pt-4 space-y-2">
-            <h4 className="font-semibold text-gray-600">Copyright Text Style</h4>
-            <StyleInput label="Color" type="color" name="color" value={styles.copyright?.color} onChange={(e) => handleStyleChange(e, 'copyright')} />
-            <StyleInput label="Font Size" type="number" name="fontSize" value={styles.copyright?.fontSize} onChange={(e) => handleStyleChange(e, 'copyright')} unit="px" />
+          <h4 className="font-semibold text-gray-600">Layout</h4>
+          <SelectInput label="Direction" name="flexDirection" value={styles.bottomSection?.flexDirection} onChange={(e) => handleStyleChange(e, 'bottomSection')} options={[{ value: 'row', label: 'Row' }, { value: 'column', label: 'Column' }]} />
+          <SelectInput label="Justify Content" name="justifyContent" value={styles.bottomSection?.justifyContent} onChange={(e) => handleStyleChange(e, 'bottomSection')} options={[{ value: 'space-between', label: 'Space Between' }, { value: 'center', label: 'Center' }, { value: 'flex-start', label: 'Start' }]} />
         </div>
         <div className="border-t pt-4 space-y-2">
-            <h4 className="font-semibold text-gray-600">Social Icons</h4>
-            <StyleInput label="Size" type="number" name="size" value={styles.socialIcon?.size} onChange={(e) => handleStyleChange(e, 'socialIcon')} unit="px" />
-            <StyleInput label="Color" type="color" name="color" value={styles.socialIcon?.color} onChange={(e) => handleStyleChange(e, 'socialIcon')} />
-            <StyleInput label="Hover Color" type="color" name="hoverColor" value={styles.socialIcon?.hoverColor} onChange={(e) => handleStyleChange(e, 'socialIcon')} />
+          <h4 className="font-semibold text-gray-600">Copyright Text Style</h4>
+          <StyleInput label="Color" type="color" name="color" value={styles.copyright?.color} onChange={(e) => handleStyleChange(e, 'copyright')} />
+          <StyleInput label="Font Size" type="number" name="fontSize" value={styles.copyright?.fontSize} onChange={(e) => handleStyleChange(e, 'copyright')} unit="px" />
+        </div>
+        <div className="border-t pt-4 space-y-2">
+          <h4 className="font-semibold text-gray-600">Social Icons</h4>
+          <StyleInput label="Size" type="number" name="size" value={styles.socialIcon?.size} onChange={(e) => handleStyleChange(e, 'socialIcon')} unit="px" />
+          <StyleInput label="Color" type="color" name="color" value={styles.socialIcon?.color} onChange={(e) => handleStyleChange(e, 'socialIcon')} />
+          <StyleInput label="Hover Color" type="color" name="hoverColor" value={styles.socialIcon?.hoverColor} onChange={(e) => handleStyleChange(e, 'socialIcon')} />
         </div>
       </fieldset>
     </div>

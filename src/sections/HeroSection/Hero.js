@@ -1,9 +1,9 @@
 // components/storefront/Hero.js
 import React from 'react';
 
-export function Hero({ data }) {
-  const { styles = {}, content = {} } = data || {};
-  const { 
+export function Hero({ data, isSelected, handleComponentSelect }) {
+  const { styles = {}, content = {}, id } = data || {};
+  const {
     container: s_container = {},
     background: s_bg = {},
     contentLayout: s_layout = {},
@@ -31,17 +31,19 @@ export function Hero({ data }) {
       color: ${s_button.hoverTextColor} !important;
     }
   `;
-
+console.log("idddddd", id);
   return (
-    <section style={containerStyles}>
+    <section className={`relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`} style={containerStyles}
+      onClick={() => handleComponentSelect(id)}
+    >
       <style>{hoverStyles}</style>
-      
+
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         {s_bg.type === 'image' && s_bg.image?.src && (
           <>
             <img src={s_bg.image.src} alt={s_bg.image.alt} className="w-full h-full object-cover" />
-            <div 
+            <div
               className="absolute inset-0 bg-black"
               style={{ opacity: s_bg.image.overlayOpacity || 0.3 }}
             ></div>
@@ -53,11 +55,11 @@ export function Hero({ data }) {
       </div>
 
       {/* Content Layer */}
-      <div 
-        className="relative z-10" 
+      <div
+        className="relative z-10"
         style={{ textAlign: s_layout.textAlign || 'center' }}
       >
-        <h1 
+        <h1
           style={{
             color: s_heading.color,
             fontSize: `${s_heading.fontSize || 48}px`,
@@ -67,7 +69,7 @@ export function Hero({ data }) {
         >
           {heading}
         </h1>
-        <p 
+        <p
           style={{
             color: s_subheading.color,
             fontSize: `${s_subheading.fontSize || 20}px`,

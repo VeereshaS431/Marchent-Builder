@@ -39,13 +39,13 @@ const SelectInput = ({ label, name, value, onChange, options = [] }) => (
 );
 
 // --- Main Editor Component ---
-export function FeaturedProductEditor({ data, onUpdate }) {
+export function FeaturedProductEditor({ data, components, onUpdate }) {
   const styles = data.styles || {};
   const product = data.product || {};
 
   const handleStyleChange = (e, section) => {
     const { name, value } = e.target;
-    onUpdate({
+    const update = {
       ...data,
       styles: {
         ...styles,
@@ -54,31 +54,56 @@ export function FeaturedProductEditor({ data, onUpdate }) {
           [name]: value,
         },
       },
+    }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   const handleTextChange = (e) => {
     const { name, value } = e.target;
-    onUpdate({
+
+    const update = {
       ...data,
       [name]: value,
+    }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   const handleProductChange = (e) => {
     const { name, value } = e.target;
-    onUpdate({
+    const update = {
       ...data,
       product: {
         ...product,
         [name]: value,
       },
+    }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   const handleCTAChange = (e) => {
     const { name, value } = e.target;
-    onUpdate({
+    const update = {
       ...data,
       product: {
         ...product,
@@ -87,11 +112,20 @@ export function FeaturedProductEditor({ data, onUpdate }) {
           [name]: value,
         },
       },
+    }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   const toggleCTA = () => {
-    onUpdate({
+
+    const update = {
       ...data,
       product: {
         ...product,
@@ -100,7 +134,16 @@ export function FeaturedProductEditor({ data, onUpdate }) {
           enabled: !product.cta?.enabled,
         },
       },
+    }
+
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   return (
@@ -161,8 +204,8 @@ export function FeaturedProductEditor({ data, onUpdate }) {
           <h4 className="font-semibold text-gray-600">Section Title</h4>
           <StyleInput label="Color" name="color" type="color" value={styles.titleStyle?.color} onChange={(e) => handleStyleChange(e, 'titleStyle')} />
           <StyleInput label="Font Size" name="fontSize" type="number" unit="px" value={styles.titleStyle?.fontSize} onChange={(e) => handleStyleChange(e, 'titleStyle')} />
-          <SelectInput label="Font Weight" name="fontWeight" value={styles.titleStyle?.fontWeight} onChange={(e) => handleStyleChange(e, 'titleStyle')} options={[{value: "400", label: "Normal"}, {value: "600", label: "Semi-Bold"}, {value: "700", label: "Bold"}]} />
-          <SelectInput label="Text Transform" name="textTransform" value={styles.titleStyle?.textTransform} onChange={(e) => handleStyleChange(e, 'titleStyle')} options={[{value: "none", label: "None"}, {value: "uppercase", label: "Uppercase"}]} />
+          <SelectInput label="Font Weight" name="fontWeight" value={styles.titleStyle?.fontWeight} onChange={(e) => handleStyleChange(e, 'titleStyle')} options={[{ value: "400", label: "Normal" }, { value: "600", label: "Semi-Bold" }, { value: "700", label: "Bold" }]} />
+          <SelectInput label="Text Transform" name="textTransform" value={styles.titleStyle?.textTransform} onChange={(e) => handleStyleChange(e, 'titleStyle')} options={[{ value: "none", label: "None" }, { value: "uppercase", label: "Uppercase" }]} />
         </div>
 
         <div className="space-y-2 pt-4 border-t">

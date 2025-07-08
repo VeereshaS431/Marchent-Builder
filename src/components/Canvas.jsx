@@ -1,9 +1,15 @@
 import React from 'react';
 import HeroBanner from './HeroBanner';
 import ProductGrid from './ProductGrid';
-import FeaturedCollection from './FeaturedCollection';
+// import FeaturedCollection from './FeaturedCollection';
+import { FeaturedCollection } from '../sections/FeaturedCollection/FeaturedCollection';
 import ProductCard from './ProductCard';
 import NavbarSection from '../sections/NavbarSection';
+import { Hero } from '../sections/HeroSection/Hero';
+import { FeaturedProduct } from '../sections/FeaturedProduct/FeaturedProduct';
+import { Footer } from '../sections/Footer/Footer';
+import { Navbar } from '../sections/Navbar';
+// import { FeaturedCollectionEditor } from '../sections/FeaturedCollection/FeaturedCollectionEditor';
 
 const Canvas = ({
   showComponentPanel,
@@ -82,53 +88,82 @@ const Canvas = ({
             </div>
           ) : (
             <>
-              {components.map((component) => {
-                switch (component.type) {
-                  case 'Hero Banner':
+              {components?.map((component) => {
+                switch (component?.component) {
+                  case 'HeroSection':
                     return (
                       <div className='mb-4'>
-                        <HeroBanner
+                        {/* <HeroBanner
                           key={component.id}
                           component={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
                           updateComponentContent={updateComponentContent}
+                        /> */}
+                        <Hero
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
                         />
+
                       </div>
                     );
-                  case 'Product Grid':
+                  case 'FeaturedCollection':
                     return (
                       <div className='mb-4'>
-                        <ProductGrid
+                        {/* <ProductGrid
                           key={component.id}
                           component={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
                           updateComponentContent={updateComponentContent}
-                        />
-                      </div>
-                    );
-                  case 'Featured Collection':
-                    return (
-                      <div className='mb-4'>
+                        /> */}
                         <FeaturedCollection
                           key={component.id}
-                          component={component}
+                          data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          updateComponentContent={updateComponentContent}
+                          // updateComponentContent={updateComponentContent}
                         />
                       </div>
                     );
-                  case 'Product Card':
+                  case 'FeaturedProduct':
                     return (
                       <div className='mb-4'>
-                        <ProductCard
+                        {/* <FeaturedCollection
                           key={component.id}
                           component={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
                           updateComponentContent={updateComponentContent}
+                        /> */}
+                        <FeaturedProduct
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
+                  case 'Footer':
+                    return (
+                      <div className='mb-4'>
+                        {/* <ProductCard
+                          key={component.id}
+                          component={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          updateComponentContent={updateComponentContent}
+                        /> */}
+                        <Footer
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
                         />
                       </div>
                     );
@@ -136,12 +171,19 @@ const Canvas = ({
                   case 'Navbar':
                     return (
                       <div className='mb-4'>
-                        <NavbarSection
+                        {/* <NavbarSection
                           logo={logo}
                           navItems={navItems}
                           getNavbarStyle={getNavbarStyle}
                           getNavItemStyle={getNavItemStyle}
                           key={component.id}
+                        /> */}
+                        <Navbar
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
                         />
                       </div>
                     );

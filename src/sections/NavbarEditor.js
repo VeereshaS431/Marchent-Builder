@@ -49,23 +49,42 @@ const SelectInput = ({ label, name, value, onChange, options = [] }) => (
   </div>
 );
 
-export function NavbarEditor({ data, onUpdate }) {
+export function NavbarEditor({ data, components, onUpdate }) {
   // A generic handler for any change within the 'styles' object
   const handleStyleChange = (e, element) => {
     const { name, value } = e.target;
-    onUpdate({
+    const update = {
       ...data,
       styles: {
         ...data.styles,
-        [element]: { ...data.styles[element], [name]: value },
+        [element]: {
+          ...data.styles[element],
+          [name]: value,
+        },
       },
+    };
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
     });
+    onUpdate(updatedComponents);
   };
 
   // A specific handler for the logo object
   const handleLogoChange = (e) => {
     const { name, value } = e.target;
-    onUpdate({ ...data, logo: { ...data.logo, [name]: value } });
+    const update = { ...data, logo: { ...data.logo, [name]: value } }
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
+    });
+    onUpdate(updatedComponents);
   };
 
   // Handler for link text/url changes (no changes needed here)
@@ -74,7 +93,15 @@ export function NavbarEditor({ data, onUpdate }) {
     const updatedLinks = data.links.map((link) =>
       link.id === linkId ? { ...link, [name]: value } : link
     );
-    onUpdate({ ...data, links: updatedLinks });
+    const update = { ...data, links: updatedLinks };
+    const updatedComponents = components.map((comp) => {
+      if (comp.id === data.id) {
+        return update;
+        // return { ...comp, styles: update.styles };
+      }
+      return comp;
+    });
+    onUpdate(updatedComponents);
   };
 
   const styles = data.styles || {};
