@@ -49,7 +49,8 @@ export function Footer({ data, isSelected, handleComponentSelect }) {
             <div key={column.id}>
               {column.type === 'description' && (
                 <div className="space-y-4">
-                  {column.logo?.src && <img src={column.logo.src} alt={column.logo.alt} style={{ width: `${column.logo.width}px`, marginBottom: `${column.logo.marginBottom || 16}px` }} />}
+                  {column.logo?.src && <img src={column.logo.src} alt={column.logo.alt} style={{ width: `${column.logo.width}px`, marginBottom: `${column.logo.marginBottom || 16}px` }} draggable="false"
+                  onDragStart={(e) => e.preventDefault()}/>}
                   <p style={{ color: s_desc.color, fontSize: `${s_desc.fontSize}px`, lineHeight: s_desc.lineHeight }}>{column.text}</p>
                 </div>
               )}

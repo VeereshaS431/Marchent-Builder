@@ -4,6 +4,9 @@ import { NavbarEditor } from '../sections/NavbarEditor';
 import { FooterEditor } from '../sections/Footer/FooterEditor';
 import { FeaturedCollectionEditor } from '../sections/FeaturedCollection/FeaturedCollectionEditor';
 import { FeaturedProductEditor } from '../sections/FeaturedProduct/FeaturedProductEditor';
+import { ContactFormEditor } from '../sections/ContactForm/ContactFormEditor';
+import { PreFooterEmailSignupEditor } from '../sections/PreFooter/PreFooterEditor';
+import { ProductHighlightEditor } from '../sections/ProductHighlight/ProductHighlightEditor';
 
 const PropertiesPanel = ({
   selectedComponent,
@@ -73,6 +76,21 @@ const PropertiesPanel = ({
         {
           component.component === "FeaturedProduct" && (
             <FeaturedProductEditor data={component} components={components} onUpdate={setComponents} />
+          )
+        }
+        {
+          component.component === "ContactForm" && (
+            <ContactFormEditor data={component} components={components} onUpdate={setComponents} />
+          )
+        }
+        {
+          component.component === "PreFooterEmailSignup" && (
+            <PreFooterEmailSignupEditor data={component} components={components} onUpdate={setComponents} />
+          )
+        }
+        {
+          component.component === "ProductHighlight" && (
+            <ProductHighlightEditor data={component} components={components} onUpdate={setComponents} />
           )
         }
 
