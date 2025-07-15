@@ -1,22 +1,30 @@
 // components/storefront/Navbar.js
-import React from 'react';
+import React from "react";
 
 export function Navbar({ data, isSelected, handleComponentSelect }) {
   const { styles = {}, logo = {}, links = [], ctaButton = {}, id } = data || {};
-  const { container = {}, links: linkStyles = {}, button: buttonStyles = {} } = styles;
+  const {
+    container = {},
+    links: linkStyles = {},
+    button: buttonStyles = {},
+  } = styles;
 
   return (
     <nav
       // The 'flex' class from Tailwind is still useful as a base
-      // className="w-full shadow-md" 
-      className={`w-full shadow-md relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`}
+      // className="w-full shadow-md"
+      className={`w-full shadow-md relative p-8 ${
+        isSelected
+          ? "ring-2 ring-blue-500 ring-offset-2"
+          : "hover:outline hover:outline-gray-200"
+      }`}
       onClick={() => handleComponentSelect(id)}
       // UPDATED: Apply dynamic flexbox and container styles
       style={{
-        display: 'flex', // Explicitly set display for clarity
-        flexDirection: container.flexDirection || 'row',
-        justifyContent: container.justifyContent || 'space-between',
-        alignItems: container.alignItems || 'center',
+        display: "flex", // Explicitly set display for clarity
+        flexDirection: container.flexDirection || "row",
+        justifyContent: container.justifyContent || "space-between",
+        alignItems: container.alignItems || "center",
         backgroundColor: container.backgroundColor,
         padding: `${container.paddingY || 16}px ${container.paddingX || 24}px`,
       }}
@@ -29,8 +37,10 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
           style={{
             width: `${logo.width || 120}px`,
             height: `${logo.height || 40}px`,
-            objectFit: 'contain'
+            objectFit: "contain",
           }}
+          draggable="false"
+          onDragStart={(e) => e.preventDefault()}
         />
       </div>
 
@@ -42,12 +52,12 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
       <ul
         className="flex items-center"
         style={{
-          flexDirection: container.flexDirection || 'row',
+          flexDirection: container.flexDirection || "row",
           // Add a gap for better spacing in both row and column modes
-          gap: '24px'
+          gap: "24px",
         }}
       >
-        {links.map(link => (
+        {links.map((link) => (
           <li key={link.id}>
             <a
               href={link.url}
@@ -55,7 +65,7 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
               style={{
                 color: linkStyles.color,
                 fontSize: `${linkStyles.fontSize || 16}px`,
-                fontWeight: linkStyles.fontWeight || 500
+                fontWeight: linkStyles.fontWeight || 500,
               }}
             >
               {link.text}
@@ -72,7 +82,9 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
           style={{
             backgroundColor: buttonStyles.backgroundColor,
             color: buttonStyles.textColor,
-            padding: `${buttonStyles.paddingY || 8}px ${buttonStyles.paddingX || 16}px`,
+            padding: `${buttonStyles.paddingY || 8}px ${
+              buttonStyles.paddingX || 16
+            }px`,
             borderRadius: `${buttonStyles.borderRadius || 6}px`,
           }}
         >

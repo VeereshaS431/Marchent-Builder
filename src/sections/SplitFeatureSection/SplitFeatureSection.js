@@ -1,6 +1,10 @@
 import React from "react";
 
-export function FeaturedProduct({ data, isSelected, handleComponentSelect }) {
+export function SplitFeatureSection({
+  data,
+  isSelected,
+  handleComponentSelect,
+}) {
   const { title, description, product = {}, styles = {}, id } = data || {};
 
   const {
@@ -8,28 +12,26 @@ export function FeaturedProduct({ data, isSelected, handleComponentSelect }) {
     titleStyle = {},
     descriptionStyle = {},
     imageStyle = {},
-    productTitle = {},
-    productPrice = {},
     button = {},
   } = styles;
 
   return (
     <section
       style={{
-        backgroundColor: container.backgroundColor,
-        padding: `${container.paddingY || 64}px ${container.paddingX || 24}px`,
+        backgroundColor: container.backgroundColor || "#111",
+        padding: `${container.paddingY || 64}px ${container.paddingX || 32}px`,
       }}
-      className={`relative p-8 ${
+      className={`relative ${
         isSelected
           ? "ring-2 ring-blue-500 ring-offset-2"
           : "hover:outline hover:outline-gray-200"
       }`}
       onClick={() => handleComponentSelect(id)}
     >
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <img
           src={product.image}
-          alt={product.title}
+          alt="Ski Promo"
           style={{
             width: imageStyle.width || "100%",
             height: imageStyle.height || "auto",
@@ -39,15 +41,14 @@ export function FeaturedProduct({ data, isSelected, handleComponentSelect }) {
           draggable="false"
           onDragStart={(e) => e.preventDefault()}
         />
-
-        <div className="space-y-6">
+        <div className="space-y-6 text-white">
           <h2
             style={{
               fontSize: `${titleStyle.fontSize}px`,
               color: titleStyle.color,
               fontWeight: titleStyle.fontWeight,
               textTransform: titleStyle.textTransform,
-              marginBottom: `${titleStyle.marginBottom || 0}px`,
+              marginBottom: `${titleStyle.marginBottom}px`,
             }}
           >
             {title}
@@ -57,29 +58,10 @@ export function FeaturedProduct({ data, isSelected, handleComponentSelect }) {
               fontSize: `${descriptionStyle.fontSize}px`,
               color: descriptionStyle.color,
               maxWidth: descriptionStyle.maxWidth,
-              marginBottom: `${descriptionStyle.marginBottom || 0}px`,
+              marginBottom: `${descriptionStyle.marginBottom}px`,
             }}
           >
             {description}
-          </p>
-
-          <h3
-            style={{
-              fontSize: `${productTitle.fontSize}px`,
-              fontWeight: productTitle.fontWeight,
-              color: productTitle.color,
-            }}
-          >
-            {product.title}
-          </h3>
-          <p
-            style={{
-              fontSize: `${productPrice.fontSize}px`,
-              color: productPrice.color,
-              fontWeight: productPrice.fontWeight,
-            }}
-          >
-            {product.price}
           </p>
 
           {product.cta?.enabled && (

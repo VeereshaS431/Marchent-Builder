@@ -133,7 +133,7 @@ export function FooterEditor({ data, components, onUpdate }) {
   const styles = data.styles || {};
 
   return (
-    <div className="p-4 bg-white w-96 space-y-6">
+    <div className="p-4 bg-white w-50 space-y-6">
       <h3 className="text-xl font-semibold">Edit Footer</h3>
 
       {/* --- Section 1: Content Editor --- */}

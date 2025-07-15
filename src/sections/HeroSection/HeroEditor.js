@@ -139,7 +139,7 @@ export function HeroEditor({ data, components, onUpdate }) {
   const content = data.content || {};
 
   return (
-    <div className="p-4 bg-white w-96 space-y-6">
+    <div className="p-4 bg-white w-50 space-y-6">
       <h3 className="text-xl font-semibold">Edit Hero Section</h3>
 
       {/* --- Section 1: Background --- */}

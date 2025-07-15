@@ -1,14 +1,18 @@
-import React from 'react';
-import HeroBanner from './HeroBanner';
-import ProductGrid from './ProductGrid';
+import React from "react";
+import HeroBanner from "./HeroBanner";
+import ProductGrid from "./ProductGrid";
 // import FeaturedCollection from './FeaturedCollection';
-import { FeaturedCollection } from '../sections/FeaturedCollection/FeaturedCollection';
-import ProductCard from './ProductCard';
-import NavbarSection from '../sections/NavbarSection';
-import { Hero } from '../sections/HeroSection/Hero';
-import { FeaturedProduct } from '../sections/FeaturedProduct/FeaturedProduct';
-import { Footer } from '../sections/Footer/Footer';
-import { Navbar } from '../sections/Navbar';
+import { FeaturedCollection } from "../sections/FeaturedCollection/FeaturedCollection";
+import ProductCard from "./ProductCard";
+import NavbarSection from "../sections/NavbarSection";
+import { Hero } from "../sections/HeroSection/Hero";
+import { FeaturedProduct } from "../sections/FeaturedProduct/FeaturedProduct";
+import { Footer } from "../sections/Footer/Footer";
+import { Navbar } from "../sections/Navbar";
+import { ContactForm } from "../sections/ContactForm/ContactForm";
+import { PreFooterEmailSignup } from "../sections/PreFooter/PreFooter";
+import { ProductHighlight } from "../sections/ProductHighlight/ProductHighlight";
+import { SplitFeatureSection } from "../sections/SplitFeatureSection/SplitFeatureSection";
 // import { FeaturedCollectionEditor } from '../sections/FeaturedCollection/FeaturedCollectionEditor';
 
 const Canvas = ({
@@ -36,8 +40,7 @@ const Canvas = ({
   getNavbarStyle,
   getNavItemStyle,
 }) => {
-
-  console.log('Canvas components:', components);
+  console.log("Canvas components:", components);
   return (
     <div className="flex-1 flex flex-col bg-gray-100 overflow-hidden">
       {!showComponentPanel && (
@@ -140,19 +143,31 @@ const Canvas = ({
           </button>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto p-6" onDrop={handleDrop} onDragOver={handleDragOver}>
+      <div
+        className="flex-1 overflow-y-auto p-6"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
         <div
-          className={`mx-auto bg-gray-100 rounded-lg transition-all ${previewMode === 'desktop' ? 'max-w-full' : previewMode === 'tablet' ? 'max-w-2xl' : 'max-w-sm'
-            }`}
+          className={`mx-auto bg-gray-100 rounded-lg transition-all ${
+            previewMode === "desktop"
+              ? "max-w-full"
+              : previewMode === "tablet"
+              ? "max-w-2xl"
+              : "max-w-sm"
+          }`}
         >
           {canvasComponents.length === 0 ? (
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
               <div className="mx-auto h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                 <i className="fas fa-plus text-gray-400 text-xl"></i>
               </div>
-              <h3 className="text-lg font-medium text-gray-700 mb-2">Add your first component</h3>
+              <h3 className="text-lg font-medium text-gray-700 mb-2">
+                Add your first component
+              </h3>
               <p className="text-gray-500 mb-4">
-                Drag and drop components from the left panel to start building your page
+                Drag and drop components from the left panel to start building
+                your page
               </p>
               <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer !rounded-button whitespace-nowrap">
                 <i className="fas fa-plus mr-2"></i>Add Component
@@ -162,9 +177,9 @@ const Canvas = ({
             <>
               {components?.map((component) => {
                 switch (component?.component) {
-                  case 'HeroSection':
+                  case "HeroSection":
                     return (
-                      <div className='mb-4'>
+                      <div className="mb-4">
                         {/* <HeroBanner
                           key={component.id}
                           component={component}
@@ -179,12 +194,11 @@ const Canvas = ({
                           handleComponentSelect={handleComponentSelect}
                         // updateComponentContent={updateComponentContent}
                         />
-
                       </div>
                     );
-                  case 'FeaturedCollection':
+                  case "FeaturedCollection":
                     return (
-                      <div className='mb-4'>
+                      <div className="mb-4">
                         {/* <ProductGrid
                           key={component.id}
                           component={component}
@@ -201,9 +215,9 @@ const Canvas = ({
                         />
                       </div>
                     );
-                  case 'FeaturedProduct':
+                  case "FeaturedProduct":
                     return (
-                      <div className='mb-4'>
+                      <div className="mb-4">
                         {/* <FeaturedCollection
                           key={component.id}
                           component={component}
@@ -220,9 +234,9 @@ const Canvas = ({
                         />
                       </div>
                     );
-                  case 'Footer':
+                  case "Footer":
                     return (
-                      <div className='mb-4'>
+                      <div className="mb-4">
                         {/* <ProductCard
                           key={component.id}
                           component={component}
@@ -240,9 +254,9 @@ const Canvas = ({
                       </div>
                     );
 
-                  case 'Navbar':
+                  case "Navbar":
                     return (
-                      <div className='mb-4'>
+                      <div className="mb-4">
                         {/* <NavbarSection
                           logo={logo}
                           navItems={navItems}
@@ -259,6 +273,82 @@ const Canvas = ({
                         />
                       </div>
                     );
+                  case "ContactForm":
+                    return (
+                      <div className="mb-4">
+                        {/* <NavbarSection
+                          logo={logo}
+                          navItems={navItems}
+                          getNavbarStyle={getNavbarStyle}
+                          getNavItemStyle={getNavItemStyle}
+                          key={component.id}
+                        /> */}
+                        <ContactForm
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
+                  case "PreFooterEmailSignup":
+                    return (
+                      <div className="mb-4">
+                        {/* <NavbarSection
+                          logo={logo}
+                          navItems={navItems}
+                          getNavbarStyle={getNavbarStyle}
+                          getNavItemStyle={getNavItemStyle}
+                          key={component.id}
+                        /> */}
+                        <PreFooterEmailSignup
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
+                  case "ProductHighlight":
+                    return (
+                      <div className="mb-4">
+                        {/* <NavbarSection
+                          logo={logo}
+                          navItems={navItems}
+                          getNavbarStyle={getNavbarStyle}
+                          getNavItemStyle={getNavItemStyle}
+                          key={component.id}
+                        /> */}
+                        <ProductHighlight
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
+                  case "SplitFeatureSection":
+                    return (
+                      <div className="mb-4">
+                        {/* <NavbarSection
+                          logo={logo}
+                          navItems={navItems}
+                          getNavbarStyle={getNavbarStyle}
+                          getNavItemStyle={getNavItemStyle}
+                          key={component.id}
+                        /> */}
+                        <SplitFeatureSection
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
                   default:
                     return null;
                 }
@@ -269,13 +359,16 @@ const Canvas = ({
                 getNavbarStyle={getNavbarStyle}
                 getNavItemStyle={getNavItemStyle}
               /> */}
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center" >
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
                 <div className="mx-auto h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                   <i className="fas fa-plus text-gray-400 text-xl"></i>
                 </div>
-                <h3 className="text-lg font-medium text-gray-700 mb-2">Add your first component</h3>
+                <h3 className="text-lg font-medium text-gray-700 mb-2">
+                  Add your first component
+                </h3>
                 <p className="text-gray-500 mb-4">
-                  Drag and drop components from the left panel to start building your page
+                  Drag and drop components from the left panel to start building
+                  your page
                 </p>
                 <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer !rounded-button whitespace-nowrap">
                   <i className="fas fa-plus mr-2"></i>Add Component
