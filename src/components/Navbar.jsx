@@ -25,7 +25,7 @@ const Navbar = ({
           <div className="h-6 w-px bg-gray-300"></div>
           <div className="text-gray-700 font-medium">{projectName}</div>
         </div>
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
           <div className="relative">
             <button
               id="page-dropdown-button"
@@ -94,7 +94,7 @@ const Navbar = ({
               <i className="fas fa-mobile-alt"></i>
             </button>
           </div>
-        </div>
+        </div> */}
         <div className="flex items-center space-x-3">
           <button
             className="px-3 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md cursor-pointer !rounded-button whitespace-nowrap"

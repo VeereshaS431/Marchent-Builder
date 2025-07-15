@@ -30,13 +30,203 @@ const App = () => {
     const [saveStatus, setSaveStatus] = useState(null);
 
     const [activePanel, setActivePanel] = useState("typography");
-    const [logo, setLogo] = useState("Your Logo");
-    const [navItems, setNavItems] = useState([
-        { id: 1, text: "Home" },
-        { id: 2, text: "About" },
-        { id: 3, text: "Services" },
-        { id: 4, text: "Contact" },
-    ]);
+    const [allPageComponents, setAllPageComponents] = useState({
+        Home: [
+
+
+            {
+                id: `navbar-section-${Date.now()}`,
+                component: "Navbar",
+                styles: {
+                    container: {
+                        backgroundColor: "#FFFFFF",
+                        paddingY: "16",
+                        paddingX: "24",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    },
+                    links: {
+                        color: "#111827",
+                        fontSize: "16",
+                        fontWeight: "500",
+                    },
+                    button: {
+                        textColor: "#FFFFFF",
+                        backgroundColor: "#2563EB",
+                        paddingY: "8",
+                        paddingX: "16",
+                        borderRadius: "6",
+                    },
+                },
+                logo: {
+                    type: "image",
+                    src: "https://images.pexels.com/photos/669502/pexels-photo-669502.jpeg?cs=srgb&dl=pexels-goumbik-669502.jpg&fm=jpg",
+                    alt: "My Awesome Store",
+                    width: 120,
+                    height: 40,
+                },
+                links: [
+                    { id: "link-001", text: "Home", url: "/" },
+                    { id: "link-002", text: "Shop All", url: "/collections/all" },
+                    { id: "link-003", text: "About Us", url: "/pages/about" },
+                ],
+                ctaButton: {
+                    enabled: true,
+                    text: "Contact Us",
+                    url: "/pages/contact",
+                },
+            },
+            {
+                id: `footer-section-${Date.now()}`,
+                component: "Footer",
+                styles: {
+                    container: {
+                        backgroundColor: "#111827",
+                        paddingY: "64",
+                        paddingX: "24",
+                    },
+                    columnsWrapper: {
+                        gridGap: "32",
+                    },
+                    columnHeading: {
+                        color: "#9CA3AF",
+                        fontSize: "14",
+                        fontWeight: "600",
+                        textTransform: "uppercase",
+                        marginBottom: "16",
+                    },
+                    descriptionText: {
+                        color: "#D1D5DB",
+                        fontSize: "16",
+                        lineHeight: "1.5",
+                    },
+                    link: {
+                        color: "#D1D5DB",
+                        hoverColor: "#FFFFFF",
+                        fontSize: "16",
+                        paddingY: "4",
+                    },
+                    bottomSection: {
+                        marginTop: "64",
+                        paddingTop: "32",
+                        borderTopWidth: "1",
+                        borderTopColor: "#374151",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    },
+                    socialIcon: {
+                        color: "#9CA3AF",
+                        hoverColor: "#FFFFFF",
+                        size: "24",
+                    },
+                    copyright: {
+                        color: "#9CA3AF",
+                        fontSize: "14",
+                    },
+                },
+                columns: [
+                    {
+                        id: "col-001",
+                        type: "description",
+                        logo: {
+                            src: "https://images.pexels.com/photos/669502/pexels-photo-669502.jpeg?cs=srgb&dl=pexels-goumbik-669502.jpg&fm=jpg",
+                            width: 100,
+                            alt: "White Logo",
+                            marginBottom: "16",
+                        },
+                        text: "Making commerce better for everyone, everywhere.",
+                    },
+                    {
+                        id: "col-002",
+                        type: "links",
+                        heading: "Products",
+                        links: [
+                            { id: "f-link-001", text: "Templates", url: "/templates" },
+                            { id: "f-link-002", text: "Pricing", url: "/pricing" },
+                            { id: "f-link-003", text: "Features", url: "/features" },
+                        ],
+                    },
+                    {
+                        id: "col-003",
+                        type: "links",
+                        heading: "Company",
+                        links: [
+                            { id: "f-link-004", text: "About Us", url: "/about" },
+                            { id: "f-link-005", text: "Careers", url: "/careers" },
+                            { id: "f-link-006", text: "Contact", url: "/contact" },
+                        ],
+                    },
+                ],
+                socialLinks: {
+                    enabled: true,
+                    links: [
+                        { id: "social-001", network: "twitter", url: "https://twitter.com" },
+                        { id: "social-002", network: "github", url: "https://github.com" },
+                        { id: "social-003", network: "linkedin", url: "https://linkedin.com" },
+                    ],
+                },
+                copyright: {
+                    text: "© 2024 Your Platform, Inc. All rights reserved.",
+                },
+
+            },
+        ],
+        Products: [],
+        About: [
+            {
+                id: `navbar-section-${Date.now()}`,
+                component: "Navbar",
+                styles: {
+                    container: {
+                        backgroundColor: "#FFFFFF",
+                        paddingY: "16",
+                        paddingX: "24",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    },
+                    links: {
+                        color: "#111827",
+                        fontSize: "16",
+                        fontWeight: "500",
+                    },
+                    button: {
+                        textColor: "#FFFFFF",
+                        backgroundColor: "#2563EB",
+                        paddingY: "8",
+                        paddingX: "16",
+                        borderRadius: "6",
+                    },
+                },
+                logo: {
+                    type: "image",
+                    src: "https://images.pexels.com/photos/669502/pexels-photo-669502.jpeg?cs=srgb&dl=pexels-goumbik-669502.jpg&fm=jpg",
+                    alt: "My Awesome Store",
+                    width: 120,
+                    height: 40,
+                },
+                links: [
+                    { id: "link-001", text: "Home", url: "/" },
+                    { id: "link-002", text: "Shop All", url: "/collections/all" },
+                    { id: "link-003", text: "About Us", url: "/pages/about" },
+                ],
+                ctaButton: {
+                    enabled: true,
+                    text: "Contact Us",
+                    url: "/pages/contact",
+                },
+            }
+        ],
+        Contact: [],
+    });
+
+    const handlePageChange = (e) => {
+        const selectedId = e.target.value;
+        setCurrentPage(selectedId);
+        setComponents(allPageComponents[selectedId] || []);
+    };
 
     const [components, setComponents] = useState([
         // {
@@ -101,301 +291,19 @@ const App = () => {
         { id: 'blog', name: 'Blog', path: '/blog' },
     ];
 
-    // const componentCategories = [
-    //     // {
-    //     //     name: 'Layout',
-    //     //     items: [
-    //     //         {
-    //     //             type: 'Container',
-    //     //             icon: 'square',
-    //     //             template: {
-    //     //                 id: `container-${Date.now()}`,
-    //     //                 type: 'Container',
-    //     //                 content: { maxWidth: 'max-w-7xl', padding: 'p-4' },
-    //     //                 style: { backgroundColor: '#ffffff' },
-    //     //             },
-    //     //         },
-    //     //         {
-    //     //             type: 'Grid',
-    //     //             icon: 'th-large',
-    //     //             template: {
-    //     //                 id: `grid-${Date.now()}`,
-    //     //                 type: 'Grid',
-    //     //                 content: { columns: 3, gap: 4 },
-    //     //                 style: { padding: 'p-4' },
-    //     //             },
-    //     //         },
-    //     //     ],
-    //     // },
-    //     {
-    //         name: 'Commerce',
-    //         items: [
-    //             {
-    //                 type: 'Product Grid',
-    //                 icon: 'th',
-    //                 template: {
-    //                     id: `product-grid-${Date.now()}`,
-    //                     type: 'Product Grid',
-    //                     content: {
-    //                         title: 'Featured Products',
-    //                         products: [
-    //                             {
-    //                                 name: 'Classic White T-Shirt',
-    //                                 price: '$29.99',
-    //                                 image: 'https://readdy.ai/api/search-image?query=A%20minimal%20and%20elegant%20white%20t-shirt%20on%20a%20clean%20light%20gray%20background%20professional%20product%20photography%20with%20soft%20shadows%20high-quality%20fabric%20texture%20visible%20simple%20and%20modern%20styling%20perfect%20for%20e-commerce&width=300&height=300&seq=10&orientation=squarish',
-    //                             },
-    //                             {
-    //                                 name: 'Denim Jacket',
-    //                                 price: '$89.99',
-    //                                 image: 'https://readdy.ai/api/search-image?query=A%20stylish%20denim%20jacket%20on%20a%20clean%20light%20gray%20background%20professional%20product%20photography%20showing%20texture%20and%20details%20modern%20minimal%20styling%20perfect%20for%20e-commerce&width=300&height=300&seq=11&orientation=squarish',
-    //                             },
-    //                             {
-    //                                 name: 'Classic Sneakers',
-    //                                 price: '$79.99',
-    //                                 image: 'https://readdy.ai/api/search-image?query=A%20pair%20of%20classic%20white%20sneakers%20on%20a%20clean%20light%20gray%20background%20professional%20product%20photography%20showing%20design%20details%20modern%20minimal%20styling%20perfect%20for%20e-commerce&width=300&height=300&seq=12&orientation=squarish',
-    //                             },
-    //                         ],
-    //                     },
-    //                     style: {
-    //                         typography: {
-    //                             fontSize: 16,
-    //                             fontWeight: 400,
-    //                             color: "#333333",
-    //                             fontFamily: "Inter, sans-serif",
-    //                         },
-    //                         spacing: {
-    //                             paddingTop: 16,
-    //                             paddingRight: 24,
-    //                             paddingBottom: 16,
-    //                             paddingLeft: 24,
-    //                             marginTop: 0,
-    //                             marginRight: 0,
-    //                             marginBottom: 0,
-    //                             marginLeft: 0,
-    //                             itemSpacing: 24,
-    //                         },
-    //                         background: {
-    //                             type: "solid",
-    //                             color: "#ffffff",
-    //                             gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
-    //                             opacity: 100,
-    //                         },
-    //                         layout: {
-    //                             orientation: "horizontal",
-    //                             alignment: "center",
-    //                         },
-    //                         effects: {
-    //                             borderRadius: 4,
-    //                             borderWidth: 1,
-    //                             borderStyle: "solid",
-    //                             borderColor: "#eeeeee",
-    //                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    //                         },
-    //                     }
-    //                 },
-    //             },
-    //             {
-    //                 type: 'Featured Collection',
-    //                 icon: 'star',
-    //                 template: {
-    //                     id: `collection-${Date.now()}`,
-    //                     type: 'Featured Collection',
-    //                     content: {
-    //                         title: 'Summer Collection',
-    //                         description: 'Discover our latest summer styles',
-    //                         buttonText: 'Shop Now',
-    //                         image: 'https://readdy.ai/api/search-image?query=A%20collection%20of%20trendy%20summer%20clothing%20items%20arranged%20aesthetically%20on%20a%20clean%20light%20gray%20background%20professional%20e-commerce%20photography%20with%20soft%20lighting%20modern%20minimal%20styling&width=600&height=400&seq=13&orientation=landscape',
-    //                     },
-    //                     style: {
-    //                         typography: {
-    //                             fontSize: 16,
-    //                             fontWeight: 400,
-    //                             color: "#333333",
-    //                             fontFamily: "Inter, sans-serif",
-    //                         },
-    //                         spacing: {
-    //                             paddingTop: 16,
-    //                             paddingRight: 24,
-    //                             paddingBottom: 16,
-    //                             paddingLeft: 24,
-    //                             marginTop: 0,
-    //                             marginRight: 0,
-    //                             marginBottom: 0,
-    //                             marginLeft: 0,
-    //                             itemSpacing: 24,
-    //                         },
-    //                         background: {
-    //                             type: "solid",
-    //                             color: "#ffffff",
-    //                             gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
-    //                             opacity: 100,
-    //                         },
-    //                         layout: {
-    //                             orientation: "horizontal",
-    //                             alignment: "center",
-    //                         },
-    //                         effects: {
-    //                             borderRadius: 4,
-    //                             borderWidth: 1,
-    //                             borderStyle: "solid",
-    //                             borderColor: "#eeeeee",
-    //                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    //                         },
-    //                     }
-    //                 },
-    //             },
-    //             {
-    //                 type: 'Product Card',
-    //                 icon: 'shopping-bag',
-    //                 template: {
-    //                     id: `product-card-${Date.now()}`,
-    //                     type: 'Product Card',
-    //                     content: {
-    //                         name: 'Premium T-Shirt',
-    //                         price: '$29.99',
-    //                         description: 'High-quality cotton t-shirt',
-    //                         image: 'https://readdy.ai/api/search-image?query=A%20premium%20white%20t-shirt%20on%20a%20clean%20light%20gray%20background%20showing%20fabric%20quality%20and%20details%20professional%20product%20photography%20with%20soft%20shadows%20modern%20minimal%20styling&width=300&height=300&seq=14&orientation=squarish',
-    //                     },
-    //                     style: {
-    //                         typography: {
-    //                             fontSize: 16,
-    //                             fontWeight: 400,
-    //                             color: "#333333",
-    //                             fontFamily: "Inter, sans-serif",
-    //                         },
-    //                         spacing: {
-    //                             paddingTop: 16,
-    //                             paddingRight: 24,
-    //                             paddingBottom: 16,
-    //                             paddingLeft: 24,
-    //                             marginTop: 0,
-    //                             marginRight: 0,
-    //                             marginBottom: 0,
-    //                             marginLeft: 0,
-    //                             itemSpacing: 24,
-    //                         },
-    //                         background: {
-    //                             type: "solid",
-    //                             color: "#ffffff",
-    //                             gradient: "linear-gradient(to right, #ffffff, #f0f0f0)",
-    //                             opacity: 100,
-    //                         },
-    //                         layout: {
-    //                             orientation: "horizontal",
-    //                             alignment: "center",
-    //                         },
-    //                         effects: {
-    //                             borderRadius: 4,
-    //                             borderWidth: 1,
-    //                             borderStyle: "solid",
-    //                             borderColor: "#eeeeee",
-    //                             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    //                         },
-    //                     }
-    //                 },
-    //             },
-    //             {
-    //                 type: 'Navbar',
-    //                 // icon: 'shopping-bag',
-    //                 // template: {
-    //                 //     id: `product-card-${Date.now()}`,
-    //                 //     type: 'Product Card',
-    //                 //     content: {
-    //                 //         name: 'Premium T-Shirt',
-    //                 //         price: '$29.99',
-    //                 //         description: 'High-quality cotton t-shirt',
-    //                 //         image: 'https://readdy.ai/api/search-image?query=A%20premium%20white%20t-shirt%20on%20a%20clean%20light%20gray%20background%20showing%20fabric%20quality%20and%20details%20professional%20product%20photography%20with%20soft%20shadows%20modern%20minimal%20styling&width=300&height=300&seq=14&orientation=squarish',
-    //                 //     },
-    //                 //     style: { backgroundColor: '#ffffff', padding: '1rem' },
-    //                 // },
-    //             },
-    //         ],
-    //     },
-    //     // {
-    //     //     name: 'Media',
-    //     //     items: [
-    //     //         {
-    //     //             type: 'Image',
-    //     //             icon: 'image',
-    //     //             template: {
-    //     //                 id: `image-${Date.now()}`,
-    //     //                 type: 'Image',
-    //     //                 content: {
-    //     //                     src: 'https://readdy.ai/api/search-image?query=A%20beautiful%20lifestyle%20product%20photography%20scene%20on%20a%20clean%20light%20gray%20background%20professional%20lighting%20with%20soft%20shadows%20modern%20minimal%20styling&width=800&height=600&seq=15&orientation=landscape',
-    //     //                     alt: 'Featured Image',
-    //     //                 },
-    //     //                 style: { width: 'full', rounded: 'lg' },
-    //     //             },
-    //     //         },
-    //     //         {
-    //     //             type: 'Gallery',
-    //     //             icon: 'images',
-    //     //             template: {
-    //     //                 id: `gallery-${Date.now()}`,
-    //     //                 type: 'Gallery',
-    //     //                 content: {
-    //     //                     images: [
-    //     //                         {
-    //     //                             src: 'https://readdy.ai/api/search-image?query=A%20lifestyle%20product%20scene%20with%20fashion%20items%20on%20clean%20light%20gray%20background%20professional%20photography%20modern%20styling%20number%201&width=400&height=400&seq=16&orientation=squarish',
-    //     //                             alt: 'Gallery Image 1',
-    //     //                         },
-    //     //                         {
-    //     //                             src: 'https://readdy.ai/api/search-image?query=A%20lifestyle%20product%20scene%20with%20fashion%20items%20on%20clean%20light%20gray%20background%20professional%20photography%20modern%20styling%20number%202&width=400&height=400&seq=17&orientation=squarish',
-    //     //                             alt: 'Gallery Image 2',
-    //     //                         },
-    //     //                         {
-    //     //                             src: 'https://readdy.ai/api/search-image?query=A%20lifestyle%20product%20scene%20with%20fashion%20items%20on%20clean%20light%20gray%20background%20professional%20photography%20modern%20styling%20number%203&width=400&height=400&seq=18&orientation=squarish',
-    //     //                             alt: 'Gallery Image 3',
-    //     //                         },
-    //     //                     ],
-    //     //                 },
-    //     //                 style: { gap: 4, rounded: 'lg' },
-    //     //             },
-    //     //         },
-    //     //     ],
-    //     // },
-    //     // {
-    //     //     name: 'Content',
-    //     //     items: [
-    //     //         {
-    //     //             type: 'Heading',
-    //     //             icon: 'heading',
-    //     //             template: {
-    //     //                 id: `heading-${Date.now()}`,
-    //     //                 type: 'Heading',
-    //     //                 content: { text: 'Section Heading', level: 'h2' },
-    //     //                 style: { size: 'text-3xl', weight: 'font-bold', color: 'text-gray-900' },
-    //     //             },
-    //     //         },
-    //     //         {
-    //     //             type: 'Text Block',
-    //     //             icon: 'align-left',
-    //     //             template: {
-    //     //                 id: `text-${Date.now()}`,
-    //     //                 type: 'Text Block',
-    //     //                 content: { text: 'Add your content here. Edit this text to make it your own.' },
-    //     //                 style: { size: 'text-lg', color: 'text-gray-600', align: 'text-left' },
-    //     //             },
-    //     //         },
-    //     //         {
-    //     //             type: 'Button',
-    //     //             icon: 'mouse-pointer',
-    //     //             template: {
-    //     //                 id: `button-${Date.now()}`,
-    //     //                 type: 'Button',
-    //     //                 content: { text: 'Click Me', url: '#' },
-    //     //                 style: {
-    //     //                     backgroundColor: '#3b82f6',
-    //     //                     textColor: '#ffffff',
-    //     //                     padding: 'px-6 py-3',
-    //     //                     rounded: 'rounded-md',
-    //     //                 },
-    //     //             },
-    //     //         },
-    //     //     ],
-    //     // },
-    // ];
+    useEffect(() => {
+        if (!currentPage) return;
 
+        setAllPageComponents((prev) => ({
+            ...prev,
+            [currentPage]: components,
+        }));
+    }, [components, currentPage]);
+
+    useEffect(() => {
+        // Initialize with the first page's components
+        setComponents(allPageComponents[currentPage] || []);
+    }, []);
 
     const componentCategories = [
         {
@@ -789,8 +697,10 @@ const App = () => {
     const handlePageSelect = (pageName) => {
         setCurrentPage(pageName);
         setIsPageDropdownOpen(false);
+        console.log("selected page", pageName);
+        setComponents(allPageComponents[pageName] || []);
     };
-
+    console.log("slected", components)
     const updateComponentContent = (componentId, field, value) => {
         setComponents((prevComponents) =>
             prevComponents.map((component) =>
@@ -991,6 +901,13 @@ const App = () => {
                         handleDragEnd={handleDragEnd}
                     />
                     <Canvas
+                        currentPage={currentPage}
+                        isPageDropdownOpen={isPageDropdownOpen}
+                        setIsPageDropdownOpen={setIsPageDropdownOpen}
+                        pages={pages}
+                        handlePageSelect={handlePageSelect}
+                        // previewMode={previewMode}
+                        setPreviewMode={setPreviewMode}
                         showComponentPanel={showComponentPanel}
                         showPropertiesPanel={showPropertiesPanel}
                         setShowComponentPanel={setShowComponentPanel}
@@ -1003,9 +920,9 @@ const App = () => {
                         handleComponentSelect={handleComponentSelect}
                         selectedComponent={selectedComponent}
                         updateComponentContent={updateComponentContent}
-                        logo={logo}
+                        // logo={logo}
                         setComponents={setComponents}
-                        // navItems={navItems}
+                    // navItems={navItems}
                     // getNavbarStyle={getNavbarStyle}
                     // getNavItemStyle={getNavItemStyle}
                     />

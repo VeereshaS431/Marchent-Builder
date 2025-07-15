@@ -12,11 +12,18 @@ import { Navbar } from '../sections/Navbar';
 // import { FeaturedCollectionEditor } from '../sections/FeaturedCollection/FeaturedCollectionEditor';
 
 const Canvas = ({
+  currentPage,
+  isPageDropdownOpen,
+  setIsPageDropdownOpen,
+  pages,
+  handlePageSelect,
+  previewMode,
+  setPreviewMode,
   showComponentPanel,
   showPropertiesPanel,
   setShowComponentPanel,
   setShowPropertiesPanel,
-  previewMode,
+  // previewMode,
   components,
   canvasComponents,
   handleDrop,
@@ -51,12 +58,77 @@ const Canvas = ({
       )}
       <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between">
         <div className="flex items-center">
-          <span className="text-sm font-medium text-gray-700 mr-3">Canvas:</span>
+          {/* <span className="text-sm font-medium text-gray-700 mr-3">Canvas:</span>
           <div className="relative">
             <button className="flex items-center px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 cursor-pointer !rounded-button whitespace-nowrap">
               <span>Home Page</span>
               <i className="fas fa-chevron-down ml-2 text-xs"></i>
             </button>
+          </div> */}
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <button
+                id="page-dropdown-button"
+                className="flex items-center px-3 py-2 bg-gray-100 rounded-md text-gray-700 hover:bg-gray-200 cursor-pointer !rounded-button whitespace-nowrap"
+                onClick={() => setIsPageDropdownOpen(!isPageDropdownOpen)}
+              >
+                <span>{currentPage}</span>
+                <i
+                  className={`fas fa-chevron-down ml-2 text-xs transition-transform duration-200 ${isPageDropdownOpen ? 'transform rotate-180' : ''
+                    }`}
+                ></i>
+              </button>
+              {isPageDropdownOpen && (
+                <div
+                  id="page-dropdown"
+                  className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50"
+                >
+                  {pages.map((page) => (
+                    <button
+                      key={page.id}
+                      className={`w-full text-left px-4 py-2 text-sm ${currentPage === page.name
+                        ? 'bg-blue-50 text-blue-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                        } cursor-pointer whitespace-nowrap`}
+                      onClick={() => handlePageSelect(page.name)}
+                    >
+                      {page.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="flex items-center space-x-2">
+              <button className="p-2 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap">
+                <i className="fas fa-undo"></i>
+              </button>
+              <button className="p-2 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap">
+                <i className="fas fa-redo"></i>
+              </button>
+            </div>
+            <div className="flex items-center bg-gray-100 rounded-md p-1">
+              <button
+                className={`p-2 ${previewMode === 'desktop' ? 'bg-white shadow-sm rounded' : 'text-gray-500'
+                  } cursor-pointer !rounded-button whitespace-nowrap`}
+                onClick={() => setPreviewMode('desktop')}
+              >
+                <i className="fas fa-desktop"></i>
+              </button>
+              <button
+                className={`p-2 ${previewMode === 'tablet' ? 'bg-white shadow-sm rounded' : 'text-gray-500'
+                  } cursor-pointer !rounded-button whitespace-nowrap`}
+                onClick={() => setPreviewMode('tablet')}
+              >
+                <i className="fas fa-tablet-alt"></i>
+              </button>
+              <button
+                className={`p-2 ${previewMode === 'mobile' ? 'bg-white shadow-sm rounded' : 'text-gray-500'
+                  } cursor-pointer !rounded-button whitespace-nowrap`}
+                onClick={() => setPreviewMode('mobile')}
+              >
+                <i className="fas fa-mobile-alt"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -105,7 +177,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          // updateComponentContent={updateComponentContent}
+                        // updateComponentContent={updateComponentContent}
                         />
 
                       </div>
@@ -125,7 +197,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          // updateComponentContent={updateComponentContent}
+                        // updateComponentContent={updateComponentContent}
                         />
                       </div>
                     );
@@ -144,7 +216,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          // updateComponentContent={updateComponentContent}
+                        // updateComponentContent={updateComponentContent}
                         />
                       </div>
                     );
@@ -163,7 +235,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          // updateComponentContent={updateComponentContent}
+                        // updateComponentContent={updateComponentContent}
                         />
                       </div>
                     );
@@ -183,7 +255,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          // updateComponentContent={updateComponentContent}
+                        // updateComponentContent={updateComponentContent}
                         />
                       </div>
                     );
