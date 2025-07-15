@@ -1,6 +1,6 @@
 import React from 'react';
 
-// --- Embedded Reusable Inputs ---
+// --- Reusable Inputs ---
 const StyleInput = ({ label, name, value, onChange, type = 'text', unit = '', ...props }) => (
   <div>
     <label className="block text-sm font-medium text-gray-700">{label}</label>
@@ -38,14 +38,19 @@ const SelectInput = ({ label, name, value, onChange, options = [] }) => (
   </div>
 );
 
-// --- Main Editor Component ---
-export function FeaturedProductEditor({ data, components, onUpdate }) {
+// --- Editor Component ---
+export function SplitFeatureSectionEditor({ data, components, onUpdate }) {
   const styles = data.styles || {};
   const product = data.product || {};
 
+  const updateComponent = (newData) => {
+    const updated = components.map((c) => (c.id === data.id ? newData : c));
+    onUpdate(updated);
+  };
+
   const handleStyleChange = (e, section) => {
     const { name, value } = e.target;
-    const update = {
+    updateComponent({
       ...data,
       styles: {
         ...styles,
@@ -54,56 +59,28 @@ export function FeaturedProductEditor({ data, components, onUpdate }) {
           [name]: value,
         },
       },
-    }
-    const updatedComponents = components.map((comp) => {
-      if (comp.id === data.id) {
-        return update;
-        // return { ...comp, styles: update.styles };
-      }
-      return comp;
     });
-    onUpdate(updatedComponents);
   };
 
   const handleTextChange = (e) => {
     const { name, value } = e.target;
-
-    const update = {
-      ...data,
-      [name]: value,
-    }
-    const updatedComponents = components.map((comp) => {
-      if (comp.id === data.id) {
-        return update;
-        // return { ...comp, styles: update.styles };
-      }
-      return comp;
-    });
-    onUpdate(updatedComponents);
+    updateComponent({ ...data, [name]: value });
   };
 
   const handleProductChange = (e) => {
     const { name, value } = e.target;
-    const update = {
+    updateComponent({
       ...data,
       product: {
         ...product,
         [name]: value,
       },
-    }
-    const updatedComponents = components.map((comp) => {
-      if (comp.id === data.id) {
-        return update;
-        // return { ...comp, styles: update.styles };
-      }
-      return comp;
     });
-    onUpdate(updatedComponents);
   };
 
   const handleCTAChange = (e) => {
     const { name, value } = e.target;
-    const update = {
+    updateComponent({
       ...data,
       product: {
         ...product,
@@ -112,20 +89,11 @@ export function FeaturedProductEditor({ data, components, onUpdate }) {
           [name]: value,
         },
       },
-    }
-    const updatedComponents = components.map((comp) => {
-      if (comp.id === data.id) {
-        return update;
-        // return { ...comp, styles: update.styles };
-      }
-      return comp;
     });
-    onUpdate(updatedComponents);
   };
 
   const toggleCTA = () => {
-
-    const update = {
+    updateComponent({
       ...data,
       product: {
         ...product,
@@ -134,23 +102,14 @@ export function FeaturedProductEditor({ data, components, onUpdate }) {
           enabled: !product.cta?.enabled,
         },
       },
-    }
-
-    const updatedComponents = components.map((comp) => {
-      if (comp.id === data.id) {
-        return update;
-        // return { ...comp, styles: update.styles };
-      }
-      return comp;
     });
-    onUpdate(updatedComponents);
   };
 
   return (
     <div className="p-4 bg-white w-50 space-y-6">
-      <h3 className="text-xl font-semibold">Edit Featured Product</h3>
+      <h3 className="text-xl font-semibold">Edit Snow Wax Promo</h3>
 
-      {/* Section: General Text Content */}
+      {/* Content */}
       <fieldset className="space-y-4 border p-4 rounded-md">
         <legend className="text-lg font-medium">Content</legend>
         <StyleInput label="Section Title" name="title" value={data.title} onChange={handleTextChange} />
@@ -166,29 +125,24 @@ export function FeaturedProductEditor({ data, components, onUpdate }) {
         </div>
       </fieldset>
 
-      {/* Section: Product Details */}
+      {/* Image & CTA */}
       <fieldset className="space-y-4 border p-4 rounded-md">
-        <legend className="text-lg font-medium">Product Info</legend>
-        <StyleInput label="Product Title" name="title" value={product.title} onChange={handleProductChange} />
-        <StyleInput label="Product Price" name="price" value={product.price} onChange={handleProductChange} />
-        <StyleInput label="Product Image URL" name="image" value={product.image} onChange={handleProductChange} />
+        <legend className="text-lg font-medium">Image & CTA</legend>
+        <StyleInput label="Image URL" name="image" value={product.image} onChange={handleProductChange} />
+        <label className="flex items-center space-x-2 pt-2">
+          <input type="checkbox" checked={product.cta?.enabled || false} onChange={toggleCTA} />
+          <span className="text-sm font-medium">Enable CTA Button</span>
+        </label>
 
-        <div className="border-t pt-4">
-          <label className="flex items-center space-x-2">
-            <input type="checkbox" checked={product.cta?.enabled || false} onChange={toggleCTA} />
-            <span className="text-sm font-medium">Enable CTA Button</span>
-          </label>
-
-          {product.cta?.enabled && (
-            <div className="space-y-2 mt-2">
-              <StyleInput label="CTA Text" name="text" value={product.cta.text} onChange={handleCTAChange} />
-              <StyleInput label="CTA URL" name="url" value={product.cta.url} onChange={handleCTAChange} />
-            </div>
-          )}
-        </div>
+        {product.cta?.enabled && (
+          <div className="space-y-2 mt-2">
+            <StyleInput label="CTA Text" name="text" value={product.cta.text} onChange={handleCTAChange} />
+            <StyleInput label="CTA URL" name="url" value={product.cta.url} onChange={handleCTAChange} />
+          </div>
+        )}
       </fieldset>
 
-      {/* Section: Layout & Container */}
+      {/* Container Layout */}
       <fieldset className="space-y-4 border p-4 rounded-md">
         <legend className="text-lg font-medium">Container</legend>
         <StyleInput label="Background Color" name="backgroundColor" type="color" value={styles.container?.backgroundColor} onChange={(e) => handleStyleChange(e, 'container')} />
@@ -196,7 +150,7 @@ export function FeaturedProductEditor({ data, components, onUpdate }) {
         <StyleInput label="Padding X" name="paddingX" type="number" unit="px" value={styles.container?.paddingX} onChange={(e) => handleStyleChange(e, 'container')} />
       </fieldset>
 
-      {/* Section: Typography */}
+      {/* Typography */}
       <fieldset className="space-y-4 border p-4 rounded-md">
         <legend className="text-lg font-medium">Typography</legend>
 
@@ -205,7 +159,6 @@ export function FeaturedProductEditor({ data, components, onUpdate }) {
           <StyleInput label="Color" name="color" type="color" value={styles.titleStyle?.color} onChange={(e) => handleStyleChange(e, 'titleStyle')} />
           <StyleInput label="Font Size" name="fontSize" type="number" unit="px" value={styles.titleStyle?.fontSize} onChange={(e) => handleStyleChange(e, 'titleStyle')} />
           <SelectInput label="Font Weight" name="fontWeight" value={styles.titleStyle?.fontWeight} onChange={(e) => handleStyleChange(e, 'titleStyle')} options={[{ value: "400", label: "Normal" }, { value: "600", label: "Semi-Bold" }, { value: "700", label: "Bold" }]} />
-          <SelectInput label="Text Transform" name="textTransform" value={styles.titleStyle?.textTransform} onChange={(e) => handleStyleChange(e, 'titleStyle')} options={[{ value: "none", label: "None" }, { value: "uppercase", label: "Uppercase" }]} />
         </div>
 
         <div className="space-y-2 pt-4 border-t">
@@ -213,21 +166,9 @@ export function FeaturedProductEditor({ data, components, onUpdate }) {
           <StyleInput label="Color" name="color" type="color" value={styles.descriptionStyle?.color} onChange={(e) => handleStyleChange(e, 'descriptionStyle')} />
           <StyleInput label="Font Size" name="fontSize" type="number" unit="px" value={styles.descriptionStyle?.fontSize} onChange={(e) => handleStyleChange(e, 'descriptionStyle')} />
         </div>
-
-        <div className="space-y-2 pt-4 border-t">
-          <h4 className="font-semibold text-gray-600">Product Title</h4>
-          <StyleInput label="Color" name="color" type="color" value={styles.productTitle?.color} onChange={(e) => handleStyleChange(e, 'productTitle')} />
-          <StyleInput label="Font Size" name="fontSize" type="number" unit="px" value={styles.productTitle?.fontSize} onChange={(e) => handleStyleChange(e, 'productTitle')} />
-        </div>
-
-        <div className="space-y-2 pt-4 border-t">
-          <h4 className="font-semibold text-gray-600">Product Price</h4>
-          <StyleInput label="Color" name="color" type="color" value={styles.productPrice?.color} onChange={(e) => handleStyleChange(e, 'productPrice')} />
-          <StyleInput label="Font Size" name="fontSize" type="number" unit="px" value={styles.productPrice?.fontSize} onChange={(e) => handleStyleChange(e, 'productPrice')} />
-        </div>
       </fieldset>
 
-      {/* Section: CTA Button */}
+      {/* CTA Button */}
       <fieldset className="space-y-4 border p-4 rounded-md">
         <legend className="text-lg font-medium">CTA Button Style</legend>
         <StyleInput label="Text Color" name="textColor" type="color" value={styles.button?.textColor} onChange={(e) => handleStyleChange(e, 'button')} />

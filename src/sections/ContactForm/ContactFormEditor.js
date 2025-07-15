@@ -125,7 +125,7 @@ export function ContactFormEditor({ data, components, onUpdate }) {
   const submitButton = data.submitButton || {};
 
   return (
-    <div className="p-4 border-l bg-gray-50 w-96 space-y-6 overflow-y-auto h-full">
+    <div className="p-4 border-l bg-gray-50 w-50 space-y-6 overflow-y-auto h-full">
       <h3 className="text-xl font-semibold">Edit Contact Form</h3>
 
       {/* Container Styling */}

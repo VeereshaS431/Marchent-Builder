@@ -91,7 +91,7 @@ export function FeaturedCollectionEditor({ data, components, onUpdate }) {
   };
 
   return (
-    <div className="p-4 bg-white w-70 space-y-6">
+    <div className="p-4 bg-white w-50 space-y-6">
       <h3 className="text-xl font-semibold">Edit Featured Collection</h3>
 
       <fieldset className="space-y-4 border p-4 rounded-md">

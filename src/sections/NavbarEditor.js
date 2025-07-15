@@ -76,7 +76,7 @@ export function NavbarEditor({ data, components, onUpdate }) {
   // A specific handler for the logo object
   const handleLogoChange = (e) => {
     const { name, value } = e.target;
-    const update = { ...data, logo: { ...data.logo, [name]: value } }
+    const update = { ...data, logo: { ...data.logo, [name]: value } };
     const updatedComponents = components.map((comp) => {
       if (comp.id === data.id) {
         return update;
@@ -108,7 +108,7 @@ export function NavbarEditor({ data, components, onUpdate }) {
   const containerStyles = styles.container || {};
 
   return (
-    <div className="p-4 border-l bg-gray-50 w-96 space-y-6 overflow-y-auto h-full">
+    <div className="p-4 border-l bg-gray-50 w-50 space-y-6 overflow-y-auto h-full">
       <h3 className="text-xl font-semibold">Edit Navbar</h3>
 
       {/* UPDATED: Container now has a Layout section */}

@@ -964,6 +964,66 @@ const App = () => {
             },
           },
         },
+        {
+          type: "SplitFeatureSection",
+          icon: "snowflake",
+          template: {
+            id: `snow-wax-promo-${Date.now()}`,
+            component: "SplitFeatureSection",
+            title: "Stay hydrated",
+            description:
+              "Try our wax subscription so you can fly high, but never dry.",
+            product: {
+              id: "wax-subscription-001",
+              title: "",
+              price: "",
+              image:
+                "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=compress&cs=tinysrgb&w=1600", // Replace with your own CDN
+              cta: {
+                enabled: true,
+                text: "Get waxy now",
+                url: "/subscribe",
+              },
+            },
+            styles: {
+              container: {
+                backgroundColor: "#111111",
+                paddingY: "64",
+                paddingX: "32",
+              },
+              titleStyle: {
+                fontSize: "36",
+                fontWeight: "700",
+                color: "#FFFFFF",
+                textTransform: "none",
+                marginBottom: "16",
+              },
+              descriptionStyle: {
+                fontSize: "18",
+                color: "#D1D5DB",
+                maxWidth: "480",
+                marginBottom: "24",
+              },
+              imageStyle: {
+                width: "100%",
+                height: "auto",
+                objectFit: "cover",
+                borderRadius: "12px",
+              },
+              button: {
+                paddingY: "12",
+                paddingX: "24",
+                backgroundColor: "#FFFFFF",
+                textColor: "#111111",
+                hoverBackgroundColor: "#E5E7EB",
+                hoverTextColor: "#111111",
+                fontSize: "16",
+                fontWeight: "600",
+                borderRadius: "6",
+              },
+            },
+          },
+        },
       ],
     },
   ];
