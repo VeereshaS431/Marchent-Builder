@@ -8,6 +8,8 @@ import { ContactFormEditor } from "../sections/ContactForm/ContactFormEditor";
 import { PreFooterEmailSignupEditor } from "../sections/PreFooter/PreFooterEditor";
 import { ProductHighlightEditor } from "../sections/ProductHighlight/ProductHighlightEditor";
 import { SplitFeatureSectionEditor } from "../sections/SplitFeatureSection/SplitFeatureSectionEditor";
+import { ImageWithTextEditor } from "../sections/ImageWithText/ImageWithTextEditor";
+import { MultimediaCollageEditor } from "../sections/MultimediaCollage/MultimediaCollageEditor";
 
 const PropertiesPanel = ({
   selectedComponent,
@@ -111,6 +113,20 @@ const PropertiesPanel = ({
         )}
         {component.component === "SplitFeatureSection" && (
           <SplitFeatureSectionEditor
+            data={component}
+            components={components}
+            onUpdate={setComponents}
+          />
+        )}
+        {component.component === "ImageWithTextSection" && (
+          <ImageWithTextEditor
+            data={component}
+            components={components}
+            onUpdate={setComponents}
+          />
+        )}
+        {component.component === "MultimediaCollage" && (
+          <MultimediaCollageEditor
             data={component}
             components={components}
             onUpdate={setComponents}

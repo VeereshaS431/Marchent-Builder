@@ -13,6 +13,8 @@ import { ContactForm } from "../sections/ContactForm/ContactForm";
 import { PreFooterEmailSignup } from "../sections/PreFooter/PreFooter";
 import { ProductHighlight } from "../sections/ProductHighlight/ProductHighlight";
 import { SplitFeatureSection } from "../sections/SplitFeatureSection/SplitFeatureSection";
+import { ImageWithTextSection } from "../sections/ImageWithText/ImageWithText";
+import  { MultimediaCollage } from "../sections/MultimediaCollage/MultimediaCollage";
 // import { FeaturedCollectionEditor } from '../sections/FeaturedCollection/FeaturedCollectionEditor';
 
 const Canvas = ({
@@ -341,6 +343,44 @@ const Canvas = ({
                           key={component.id}
                         /> */}
                         <SplitFeatureSection
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
+                  case "ImageWithTextSection":
+                    return (
+                      <div className="mb-4">
+                        {/* <NavbarSection
+                          logo={logo}
+                          navItems={navItems}
+                          getNavbarStyle={getNavbarStyle}
+                          getNavItemStyle={getNavItemStyle}
+                          key={component.id}
+                        /> */}
+                        <ImageWithTextSection
+                          key={component.id}
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          // updateComponentContent={updateComponentContent}
+                        />
+                      </div>
+                    );
+                  case "MultimediaCollage":
+                    return (
+                      <div className="mb-4">
+                        {/* <NavbarSection
+                          logo={logo}
+                          navItems={navItems}
+                          getNavbarStyle={getNavbarStyle}
+                          getNavItemStyle={getNavItemStyle}
+                          key={component.id}
+                        /> */}
+                        <MultimediaCollage
                           key={component.id}
                           data={component}
                           isSelected={selectedComponent === component.id}
