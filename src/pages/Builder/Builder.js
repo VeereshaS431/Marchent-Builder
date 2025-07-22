@@ -33,16 +33,59 @@ const Builder = () => {
     setIsDragging(false);
   };
 
+  // const handleDrop = (e) => {
+  //   e.preventDefault();
+  //   const componentTemplate = JSON.parse(
+  //     e.dataTransfer.getData("componentTemplate")
+  //   );
+  //   const newComponent = {
+  //     ...componentTemplate.template,
+  //     id: `${componentTemplate.type.toLowerCase()}-${Date.now()}`,
+  //   };
+  //   setComponents((prevComponents) => [...prevComponents, newComponent]);
+  //   setIsDragging(false);
+  //   setSaveStatus("saving");
+  //   setTimeout(() => {
+  //     setSaveStatus("saved");
+  //     setTimeout(() => setSaveStatus(null), 2000);
+  //   }, 1000);
+  // };
+
   const handleDrop = (e) => {
     e.preventDefault();
+
     const componentTemplate = JSON.parse(
       e.dataTransfer.getData("componentTemplate")
     );
+
     const newComponent = {
       ...componentTemplate.template,
       id: `${componentTemplate.type.toLowerCase()}-${Date.now()}`,
     };
-    setComponents((prevComponents) => [...prevComponents, newComponent]);
+
+    setComponents((prevComponents) => {
+      const navbarIndex = prevComponents.findIndex(
+        (comp) => comp.component === "Navbar"
+      );
+      const footerIndex = prevComponents.findIndex(
+        (comp) => comp.component === "Footer"
+      );
+
+      if (
+        navbarIndex !== -1 &&
+        footerIndex !== -1 &&
+        footerIndex > navbarIndex
+      ) {
+        const updatedComponents = [...prevComponents];
+        // Insert right before Footer
+        updatedComponents.splice(footerIndex, 0, newComponent);
+        return updatedComponents;
+      }
+
+      // Default: append at the end
+      return [...prevComponents, newComponent];
+    });
+
     setIsDragging(false);
     setSaveStatus("saving");
     setTimeout(() => {
