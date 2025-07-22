@@ -1123,28 +1123,7 @@ const App = () => {
           : component
       )
     );
-    setSaveStatus("saving");
-    setTimeout(() => {
-      setSaveStatus("saved");
-      setTimeout(() => setSaveStatus(null), 2000);
-    }, 1000);
   };
-
-  const updateComponentStyle = (componentId, field, value) => {
-    setComponents((prevComponents) =>
-      prevComponents.map((component) =>
-        component.id === componentId
-          ? { ...component, style: { ...component.style, [field]: value } }
-          : component
-      )
-    );
-    setSaveStatus("saving");
-    setTimeout(() => {
-      setSaveStatus("saved");
-      setTimeout(() => setSaveStatus(null), 2000);
-    }, 1000);
-  };
-
   const handleDragStart = (e, componentTemplate) => {
     e.dataTransfer.setData(
       "componentTemplate",
@@ -1261,6 +1240,7 @@ const App = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+
   const updateStyle = (category, property, value) => {
     console.log(`Updating style: ${category} > ${property} = ${value}`);
 
@@ -1290,7 +1270,93 @@ const App = () => {
     );
   };
 
+  const getNavbarStyle = () => {
+    const { typography, spacing, background, layout, effects } = styles;
+    return {
+      display: "flex",
+      flexDirection: layout.orientation === "horizontal" ? "row" : "column",
+      alignItems: layout.orientation === "horizontal" ? "center" : "flex-start",
+      justifyContent:
+        layout.alignment === "start"
+          ? "flex-start"
+          : layout.alignment === "end"
+          ? "flex-end"
+          : "center",
+      backgroundColor:
+        background.type === "solid" ? background.color : "transparent",
+      backgroundImage:
+        background.type === "gradient" ? background.gradient : "none",
+      opacity: background.opacity / 100,
+      paddingTop: `${spacing.paddingTop}px`,
+      paddingRight: `${spacing.paddingRight}px`,
+      paddingBottom: `${spacing.paddingBottom}px`,
+      paddingLeft: `${spacing.paddingLeft}px`,
+      marginTop: `${spacing.marginTop}px`,
+      marginRight: `${spacing.marginRight}px`,
+      marginBottom: `${spacing.marginBottom}px`,
+      marginLeft: `${spacing.marginLeft}px`,
+      borderRadius: `${effects.borderRadius}px`,
+      borderWidth: `${effects.borderWidth}px`,
+      borderStyle: effects.borderStyle,
+      borderColor: effects.borderColor,
+      boxShadow: effects.boxShadow,
+      fontFamily: typography.fontFamily,
+      width:
+        previewMode === "mobile"
+          ? "100%"
+          : previewMode === "tablet"
+          ? "768px"
+          : "100%",
+      maxWidth: "100%",
+    };
+  };
+
+  const getNavItemStyle = () => {
+    const { typography, spacing, layout } = styles;
+    return {
+      color: typography.color,
+      fontSize: `${typography.fontSize}px`,
+      fontWeight: typography.fontWeight,
+      padding: "8px 12px",
+      cursor: "pointer",
+      marginRight:
+        layout.orientation === "horizontal" ? `${spacing.itemSpacing}px` : "0",
+      marginBottom:
+        layout.orientation === "vertical" ? `${spacing.itemSpacing}px` : "0",
+      position: "relative",
+      transition: "all 0.2s ease",
+    };
+  };
+
   console.log("selectedComponent", selectedComponent);
+
+
+  const handleDeletecomponent = (id) => {
+    setComponents((prevComponents) =>
+      prevComponents.filter((component) => component.id !== id)
+    );
+    setSelectedComponent(null);
+    setSaveStatus("saving");
+    setTimeout(() => {
+      setSaveStatus("saved");
+      setTimeout(() => setSaveStatus(null), 2000);
+    }, 1000);
+  };
+
+  const updateComponentStyle = (componentId, field, value) => {
+    setComponents((prevComponents) =>
+      prevComponents.map((component) =>
+        component.id === componentId
+          ? { ...component, style: { ...component.style, [field]: value } }
+          : component
+      )
+    );
+    setSaveStatus("saving");
+    setTimeout(() => {
+      setSaveStatus("saved");
+      setTimeout(() => setSaveStatus(null), 2000);
+    }, 1000);
+  };
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
