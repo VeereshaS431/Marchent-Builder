@@ -11,15 +11,13 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
 
   return (
     <nav
-      // The 'flex' class from Tailwind is still useful as a base
-      // className="w-full shadow-md"
+
       className={`w-full shadow-md relative p-8 ${
         isSelected
           ? "ring-2 ring-blue-500 ring-offset-2"
           : "hover:outline hover:outline-gray-200"
       }`}
       onClick={() => handleComponentSelect(id)}
-      // UPDATED: Apply dynamic flexbox and container styles
       style={{
         display: "flex", // Explicitly set display for clarity
         flexDirection: container.flexDirection || "row",
@@ -44,16 +42,10 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
         />
       </div>
 
-      {/* 
-        Navigation Links 
-        When flexDirection is 'column', you might want different spacing.
-        We'll keep it simple for now, but this is an area for future improvement.
-      */}
       <ul
         className="flex items-center"
         style={{
           flexDirection: container.flexDirection || "row",
-          // Add a gap for better spacing in both row and column modes
           gap: "24px",
         }}
       >

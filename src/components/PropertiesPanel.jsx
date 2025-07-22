@@ -1,6 +1,6 @@
 import React from "react";
 import { HeroEditor } from "../sections/HeroSection/HeroEditor";
-import { NavbarEditor } from "../sections/NavbarEditor";
+import { NavbarEditor } from "../sections/NavbarTemplate/NavbarTemplateEditor";
 import { FooterEditor } from "../sections/Footer/FooterEditor";
 import { FeaturedCollectionEditor } from "../sections/FeaturedCollection/FeaturedCollectionEditor";
 import { FeaturedProductEditor } from "../sections/FeaturedProduct/FeaturedProductEditor";
