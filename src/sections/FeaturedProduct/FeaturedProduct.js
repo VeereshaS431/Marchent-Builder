@@ -1,6 +1,6 @@
 import React from "react";
 
-export function FeaturedProduct({ data, isSelected, handleComponentSelect }) {
+export function FeaturedProduct({ data, isSelected, handleComponentSelect, view }) {
   const { title, description, product = {}, styles = {}, id } = data || {};
 
   const {
@@ -19,12 +19,11 @@ export function FeaturedProduct({ data, isSelected, handleComponentSelect }) {
         backgroundColor: container.backgroundColor,
         padding: `${container.paddingY || 64}px ${container.paddingX || 24}px`,
       }}
-      className={`relative p-8 ${
-        isSelected
-          ? "ring-2 ring-blue-500 ring-offset-2"
-          : "hover:outline hover:outline-gray-200"
-      }`}
-      onClick={() => handleComponentSelect(id)}
+      className={view ? "relative p-8" : `relative p-8 ${isSelected
+        ? "ring-2 ring-blue-500 ring-offset-2"
+        : "hover:outline hover:outline-gray-200"
+        }`}
+      onClick={() => !view && handleComponentSelect(id)}
     >
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <img

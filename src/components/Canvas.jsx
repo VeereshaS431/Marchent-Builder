@@ -85,9 +85,8 @@ const Canvas = ({
             >
               <span>{currentPage}</span>
               <i
-                className={`fas fa-chevron-down ml-2 text-xs transition-transform duration-200 ${
-                  isPageDropdownOpen ? "transform rotate-180" : ""
-                }`}
+                className={`fas fa-chevron-down ml-2 text-xs transition-transform duration-200 ${isPageDropdownOpen ? "transform rotate-180" : ""
+                  }`}
               ></i>
             </button>
             {isPageDropdownOpen && (
@@ -95,11 +94,10 @@ const Canvas = ({
                 {pages.map((page) => (
                   <button
                     key={page.id}
-                    className={`w-full text-left px-4 py-2 text-sm ${
-                      currentPage === page.name
-                        ? "bg-blue-50 text-blue-600"
-                        : "text-gray-700 hover:bg-gray-50"
-                    }`}
+                    className={`w-full text-left px-4 py-2 text-sm ${currentPage === page.name
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-gray-700 hover:bg-gray-50"
+                      }`}
                     onClick={() => handlePageSelect(page.name)}
                   >
                     {page.name}
@@ -118,31 +116,28 @@ const Canvas = ({
           </div>
           <div className="flex items-center bg-gray-100 rounded-md p-1">
             <button
-              className={`p-2 ${
-                previewMode === "desktop"
-                  ? "bg-white shadow-sm rounded"
-                  : "text-gray-500"
-              }`}
+              className={`p-2 ${previewMode === "desktop"
+                ? "bg-white shadow-sm rounded"
+                : "text-gray-500"
+                }`}
               onClick={() => setPreviewMode("desktop")}
             >
               <i className="fas fa-desktop"></i>
             </button>
             <button
-              className={`p-2 ${
-                previewMode === "tablet"
-                  ? "bg-white shadow-sm rounded"
-                  : "text-gray-500"
-              }`}
+              className={`p-2 ${previewMode === "tablet"
+                ? "bg-white shadow-sm rounded"
+                : "text-gray-500"
+                }`}
               onClick={() => setPreviewMode("tablet")}
             >
               <i className="fas fa-tablet-alt"></i>
             </button>
             <button
-              className={`p-2 ${
-                previewMode === "mobile"
-                  ? "bg-white shadow-sm rounded"
-                  : "text-gray-500"
-              }`}
+              className={`p-2 ${previewMode === "mobile"
+                ? "bg-white shadow-sm rounded"
+                : "text-gray-500"
+                }`}
               onClick={() => setPreviewMode("mobile")}
             >
               <i className="fas fa-mobile-alt"></i>
@@ -165,13 +160,12 @@ const Canvas = ({
         onDragOver={handleDragOver}
       >
         <div
-          className={`mx-auto bg-gray-100 rounded-lg transition-all ${
-            previewMode === "desktop"
-              ? "max-w-full"
-              : previewMode === "tablet"
+          className={`mx-auto bg-gray-100 rounded-lg transition-all ${previewMode === "desktop"
+            ? "max-w-full"
+            : previewMode === "tablet"
               ? "max-w-2xl"
               : "max-w-sm"
-          }`}
+            }`}
         >
           {canvasComponents.length === 0 ? (
             renderAddComponentDropZone()
@@ -186,6 +180,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       FeaturedCollection: (
@@ -193,6 +188,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       FeaturedProduct: (
@@ -200,6 +196,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       Footer: (
@@ -209,6 +206,7 @@ const Canvas = ({
                             data={component}
                             isSelected={selectedComponent === component.id}
                             handleComponentSelect={handleComponentSelect}
+                            view={false}
                           />
                         </>
                       ),
@@ -218,6 +216,7 @@ const Canvas = ({
                             data={component}
                             isSelected={selectedComponent === component.id}
                             handleComponentSelect={handleComponentSelect}
+                            view={false}
                           />
                           {/* {renderAddComponentDropZone()} */}
                         </>
@@ -227,6 +226,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       PreFooterEmailSignup: (
@@ -234,6 +234,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       ProductHighlight: (
@@ -241,6 +242,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       SplitFeatureSection: (
@@ -248,6 +250,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       ImageWithTextSection: (
@@ -255,6 +258,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                       MultimediaCollage: (
@@ -262,11 +266,12 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       ),
                     }[component.component] || null}
                   </div>
-                  
+
                 </React.Fragment>
               ))}
             </>

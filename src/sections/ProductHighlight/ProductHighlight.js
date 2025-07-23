@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ProductHighlight({ data, isSelected, handleComponentSelect }) {
+export function ProductHighlight({ data, isSelected, handleComponentSelect, view }) {
   const { styles = {}, product = {}, id } = data || {};
   const {
     container = {},
@@ -13,12 +13,11 @@ export function ProductHighlight({ data, isSelected, handleComponentSelect }) {
 
   return (
     <section
-      className={`w-full relative p-8 ${
-        isSelected
-          ? "ring-2 ring-blue-500 ring-offset-2"
-          : "hover:outline hover:outline-gray-200"
-      }`}
-      onClick={() => handleComponentSelect(id)}
+      className={view ? "w-full relative p-8 " : `w-full relative p-8 ${isSelected
+        ? "ring-2 ring-blue-500 ring-offset-2"
+        : "hover:outline hover:outline-gray-200"
+        }`}
+      onClick={() => !view && handleComponentSelect(id)}
       style={{
         backgroundColor: container.backgroundColor,
         padding: `${container.paddingY || 48}px ${container.paddingX || 24}px`,
