@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function ImageWithTextSection({ data, isSelected, handleComponentSelect }) {
+export function ImageWithTextSection({ data, isSelected, handleComponentSelect, view }) {
   const { styles = {}, image = {}, content = {}, id } = data || {};
 
   const {
@@ -15,12 +15,12 @@ export function ImageWithTextSection({ data, isSelected, handleComponentSelect }
 
   return (
     <section
-      className={`relative ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`}
+      className={view ? "relative" : `relative ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`}
       style={{
         backgroundColor: s_container.backgroundColor || '#fff',
         padding: `${s_container.paddingY || 64}px ${s_container.paddingX || 24}px`,
       }}
-      onClick={() => handleComponentSelect(id)}
+      onClick={() => !view && handleComponentSelect(id)}
     >
       <div
         className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center"

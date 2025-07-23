@@ -1,7 +1,7 @@
 // components/storefront/Hero.js
 import React from 'react';
 
-export function Hero({ data, isSelected, handleComponentSelect }) {
+export function Hero({ data, isSelected, handleComponentSelect, view }) {
   const { styles = {}, content = {}, id } = data || {};
   const {
     container: s_container = {},
@@ -31,10 +31,10 @@ export function Hero({ data, isSelected, handleComponentSelect }) {
       color: ${s_button.hoverTextColor} !important;
     }
   `;
-console.log("idddddd", id);
+  console.log("idddddd", id);
   return (
-    <section className={`relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`} style={containerStyles}
-      onClick={() => handleComponentSelect(id)}
+    <section className={view ? "relative p-8" : `relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`} style={containerStyles}
+      onClick={() => !view && handleComponentSelect(id)}
     >
       <style>{hoverStyles}</style>
 

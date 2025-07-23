@@ -4,6 +4,7 @@ export function SplitFeatureSection({
   data,
   isSelected,
   handleComponentSelect,
+  view
 }) {
   const { title, description, product = {}, styles = {}, id } = data || {};
 
@@ -21,12 +22,11 @@ export function SplitFeatureSection({
         backgroundColor: container.backgroundColor || "#111",
         padding: `${container.paddingY || 64}px ${container.paddingX || 32}px`,
       }}
-      className={`relative ${
-        isSelected
-          ? "ring-2 ring-blue-500 ring-offset-2"
-          : "hover:outline hover:outline-gray-200"
-      }`}
-      onClick={() => handleComponentSelect(id)}
+      className={view ? "relative" : `relative ${isSelected
+        ? "ring-2 ring-blue-500 ring-offset-2"
+        : "hover:outline hover:outline-gray-200"
+        }`}
+      onClick={() => !view && handleComponentSelect(id)}
     >
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <img

@@ -9,7 +9,7 @@ const socialIconMap = {
   linkedin: <FaLinkedin />,
 };
 
-export function Footer({ data, isSelected, handleComponentSelect }) {
+export function Footer({ data, isSelected, handleComponentSelect, view }) {
   const { styles = {}, columns = [], socialLinks = {}, copyright = {}, id } = data || {};
   // Destructure all style objects with defaults for safety
   const {
@@ -36,8 +36,8 @@ export function Footer({ data, isSelected, handleComponentSelect }) {
         backgroundColor: s_container.backgroundColor,
         padding: `${s_container.paddingY || 64}px ${s_container.paddingX || 24}px`,
       }}
-      className={`relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`}
-      onClick={() => handleComponentSelect(id)}
+      className={view ? "relative p-8" : `relative p-8 ${isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'}`}
+      onClick={() => !view && handleComponentSelect(id)}
     >
       <style>{linkHoverStyles}</style>
       <div className="max-w-7xl mx-auto">
@@ -50,7 +50,7 @@ export function Footer({ data, isSelected, handleComponentSelect }) {
               {column.type === 'description' && (
                 <div className="space-y-4">
                   {column.logo?.src && <img src={column.logo.src} alt={column.logo.alt} style={{ width: `${column.logo.width}px`, marginBottom: `${column.logo.marginBottom || 16}px` }} draggable="false"
-                  onDragStart={(e) => e.preventDefault()}/>}
+                    onDragStart={(e) => e.preventDefault()} />}
                   <p style={{ color: s_desc.color, fontSize: `${s_desc.fontSize}px`, lineHeight: s_desc.lineHeight }}>{column.text}</p>
                 </div>
               )}

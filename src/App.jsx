@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import * as echarts from "echarts";
 import Navbar from "./components/Navbar";
@@ -16,6 +17,7 @@ import Analytics from "./pages/Analytics/Analytics";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Builder from "./pages/Builder/Builder";
 import Settings from "./pages/Settings/Settings";
+import PageGenerator from "./pages/PageGenerator/PageGenerator";
 
 
 
@@ -23,14 +25,16 @@ export const DataShare = createContext();
 
 // Main App component
 const App = () => {
+  const location = useLocation()
   const [activeTab, setActiveTab] = useState("dashboard");
   const [previewMode, setPreviewMode] = useState("desktop");
   const [selectedTheme, setSelectedTheme] = useState(null);
   const [userPages, setUserPages] = useState([
-    { id: "home", name: "Home", path: "/", isPublished: false },
+    { id: "home", name: "Home", path: "/home", isPublished: false },
     { id: "products", name: "Products", path: "/products", isPublished: false },
     { id: "about", name: "About", path: "/about", isPublished: false },
     { id: "contact", name: "Contact", path: "/contact", isPublished: false },
+    { id: "blog", name: "Blogs", path: "/blogs", isPublished: false },
   ]);
   const [isPageDropdownOpen, setIsPageDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("Home");
@@ -272,7 +276,7 @@ const App = () => {
     ],
     Contact: [],
   });
-
+  console.log(allPageComponents, "alll")
   const handlePageChange = (e) => {
     const selectedId = e.target.value;
     setCurrentPage(selectedId);
@@ -365,6 +369,12 @@ const App = () => {
       [currentPage]: components,
     }));
   }, [components, currentPage]);
+  const shopname = "veeresh"
+
+  const isUserPage = userPages.some((page) => {
+    console.log(location.pathname, "from path")
+    location.pathname === `/${shopname}${page.path}`
+  })
 
   return (
     <DataShare.Provider
@@ -379,49 +389,65 @@ const App = () => {
         components,
       }}
     >
-      <Router>
-        <div className="flex flex-col h-screen bg-gray-50">
-          <Navbar
-            projectName={projectName}
-            isPageDropdownOpen={isPageDropdownOpen}
-            setIsPageDropdownOpen={setIsPageDropdownOpen}
-            setActiveTab={setActiveTab}
-            activeTab={activeTab}
-            saveStatus={saveStatus}
-            handleSave={handleSave}
-            handlePublish={handlePublish}
+      {/* <Router> */}
+      <div className="flex flex-col h-screen bg-gray-50">
+        {
+          isUserPage && (
+            <Navbar
+              projectName={projectName}
+              isPageDropdownOpen={isPageDropdownOpen}
+              setIsPageDropdownOpen={setIsPageDropdownOpen}
+              setActiveTab={setActiveTab}
+              activeTab={activeTab}
+              saveStatus={saveStatus}
+              handleSave={handleSave}
+              handlePublish={handlePublish}
+            />
+          )
+        }
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/builder" element={<Builder />} />
+          <Route
+            path="/themes"
+            element={
+              <Themes
+                availableThemes={availableThemes}
+                selectedTheme={selectedTheme}
+                setSelectedTheme={setSelectedTheme}
+                setComponents={setComponents}
+                setActiveTab={setActiveTab}
+              />
+            }
           />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/builder" element={<Builder />} />
-            <Route
-              path="/themes"
-              element={
-                <Themes
-                  availableThemes={availableThemes}
-                  selectedTheme={selectedTheme}
-                  setSelectedTheme={setSelectedTheme}
-                  setComponents={setComponents}
-                  setActiveTab={setActiveTab}
-                />
-              }
-            />
-            <Route
-              path="/pages"
-              element={
-                <Pages
-                  userPages={userPages}
-                  setUserPages={setUserPages}
-                  setActiveTab={setActiveTab}
-                />
-              }
-            />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/products" element={<div>Products Page</div>} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-        </div>
-      </Router>
+          <Route
+            path="/pages"
+            element={
+              <Pages
+                userPages={userPages}
+                setUserPages={setUserPages}
+                setActiveTab={setActiveTab}
+              />
+            }
+          />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/products" element={<div>Products Page</div>} />
+          <Route path="/settings" element={<Settings />} />
+
+          {
+            userPages.map((page) => {
+              // if()
+              console.log("Rendering Route:", `/${shopname}${page.path}`, page.id);
+              let pageName = page.name
+              console.log(allPageComponents[pageName], "components")
+              return (
+                <Route path={`${shopname}${page.path}`} element={<PageGenerator components={allPageComponents[pageName]} />} />
+              )
+            })
+          }
+        </Routes>
+      </div>
+      {/* </Router> */}
     </DataShare.Provider>
   );
 };

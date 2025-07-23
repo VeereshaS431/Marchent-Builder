@@ -1,7 +1,7 @@
 // components/storefront/Navbar.js
 import React from "react";
 
-export function Navbar({ data, isSelected, handleComponentSelect }) {
+export function Navbar({ data, isSelected, handleComponentSelect, view }) {
   const { styles = {}, logo = {}, links = [], ctaButton = {}, id } = data || {};
   const {
     container = {},
@@ -12,12 +12,11 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
   return (
     <nav
 
-      className={`w-full shadow-md relative p-8 ${
-        isSelected
-          ? "ring-2 ring-blue-500 ring-offset-2"
-          : "hover:outline hover:outline-gray-200"
-      }`}
-      onClick={() => handleComponentSelect(id)}
+      className={view ? "w-full shadow-md relative p-8" : `w-full shadow-md relative p-8 ${isSelected
+        ? "ring-2 ring-blue-500 ring-offset-2"
+        : "hover:outline hover:outline-gray-200"
+        }`}
+      onClick={() => !view && handleComponentSelect(id)}
       style={{
         display: "flex", // Explicitly set display for clarity
         flexDirection: container.flexDirection || "row",
@@ -74,9 +73,8 @@ export function Navbar({ data, isSelected, handleComponentSelect }) {
           style={{
             backgroundColor: buttonStyles.backgroundColor,
             color: buttonStyles.textColor,
-            padding: `${buttonStyles.paddingY || 8}px ${
-              buttonStyles.paddingX || 16
-            }px`,
+            padding: `${buttonStyles.paddingY || 8}px ${buttonStyles.paddingX || 16
+              }px`,
             borderRadius: `${buttonStyles.borderRadius || 6}px`,
           }}
         >

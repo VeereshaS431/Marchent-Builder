@@ -2,7 +2,7 @@
 import React from "react";
 
 
-export function MultimediaCollage({ data, isSelected, handleComponentSelect }) {
+export function MultimediaCollage({ data, isSelected, handleComponentSelect, view }) {
   const { styles = {}, items = [], title = {}, id } = data || {};
 
   const {
@@ -18,12 +18,11 @@ export function MultimediaCollage({ data, isSelected, handleComponentSelect }) {
         backgroundColor: container.backgroundColor || "#fff",
         padding: `${container.paddingY || 64}px ${container.paddingX || 24}px`,
       }}
-      className={`relative ${
-        isSelected
-          ? "ring-2 ring-blue-500 ring-offset-2"
-          : "hover:outline hover:outline-gray-200"
-      }`}
-      onClick={() => handleComponentSelect(id)}
+      className={view ? "relative" : `relative ${isSelected
+        ? "ring-2 ring-blue-500 ring-offset-2"
+        : "hover:outline hover:outline-gray-200"
+        }`}
+      onClick={() => !view && handleComponentSelect(id)}
     >
       <div className="max-w-7xl mx-auto">
         {title.text && (

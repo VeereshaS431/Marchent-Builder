@@ -197,6 +197,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       </div>
                     );
@@ -208,6 +209,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
                       </div>
                     );
@@ -219,6 +221,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -231,6 +234,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -244,6 +248,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -256,6 +261,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -268,6 +274,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -280,6 +287,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -292,6 +300,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -304,6 +313,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
@@ -316,6 +326,7 @@ const Canvas = ({
                           data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
+                          view={false}
                           // updateComponentContent={updateComponentContent}
                         />
                       </div>
