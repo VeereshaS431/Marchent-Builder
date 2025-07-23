@@ -9,18 +9,14 @@ import {
 } from "react-router-dom";
 import * as echarts from "echarts";
 import Navbar from "./components/Navbar";
-
 import Themes from "./pages/Themes/Themes";
 import Pages from "./pages/Pages/Pages";
 import Analytics from "./pages/Analytics/Analytics";
-
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Builder from "./pages/Builder/Builder";
 import Settings from "./pages/Settings/Settings";
 import PageGenerator from "./pages/PageGenerator/PageGenerator";
 // import { convertOptionIdName } from "echarts/types/src/util/model.js";
-
-
 
 export const DataShare = createContext();
 
