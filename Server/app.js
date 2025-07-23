@@ -1,7 +1,8 @@
 require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const express = require("express")
+const cors = require("cors")
+const bodyParser = require("body-parser")
+const sequelize = require("./config/database");
 const app = express();
 const defineAssociations = require("./api/init_models/associations");
 const db = require("./api/models/index");
@@ -26,10 +27,9 @@ app.get("/", (req, res) => {
 });
 app.use("/api/theme", theme);
 
-app.listen(Port, () => {
-  try {
-    console.log(`server is running on http://localhost:${Port}`);
-  } catch (err) {
-    console.log(err, "form app");
-  }
+sequelize.sync().then(() => {
+    console.log("🟢 DB Synced");
+    app.listen(Port, () => {
+        console.log(`🚀 Server running at http://localhost:${Port}`);
+    });
 });
