@@ -1,16 +1,33 @@
-import React from 'react';
-import HeroBanner from './HeroBanner';
-import ProductGrid from './ProductGrid';
-import FeaturedCollection from './FeaturedCollection';
-import ProductCard from './ProductCard';
-import NavbarSection from '../sections/NavbarSection';
+
+import React from "react";
+import ProductGrid from "./ProductGrid";
+// import FeaturedCollection from './FeaturedCollection';
+import { FeaturedCollection } from "../sections/FeaturedCollection/FeaturedCollection";
+import ProductCard from "./ProductCard";
+import NavbarSection from "../sections/NavbarSection";
+import { Hero } from "../sections/HeroSection/Hero";
+import { FeaturedProduct } from "../sections/FeaturedProduct/FeaturedProduct";
+import { Footer } from "../sections/Footer/Footer";
+import { Navbar } from "../sections/NavbarTemplate/NavbarTemplate";
+import { ContactForm } from "../sections/ContactForm/ContactForm";
+import { PreFooterEmailSignup } from "../sections/PreFooter/PreFooter";
+import { ProductHighlight } from "../sections/ProductHighlight/ProductHighlight";
+import { SplitFeatureSection } from "../sections/SplitFeatureSection/SplitFeatureSection";
+import { ImageWithTextSection } from "../sections/ImageWithText/ImageWithText";
+import { MultimediaCollage } from "../sections/MultimediaCollage/MultimediaCollage";
 
 const Canvas = ({
+  currentPage,
+  isPageDropdownOpen,
+  setIsPageDropdownOpen,
+  pages,
+  handlePageSelect,
+  previewMode,
+  setPreviewMode,
   showComponentPanel,
   showPropertiesPanel,
   setShowComponentPanel,
   setShowPropertiesPanel,
-  previewMode,
   components,
   canvasComponents,
   handleDrop,
@@ -23,13 +40,30 @@ const Canvas = ({
   getNavbarStyle,
   getNavItemStyle,
 }) => {
+  console.log("Canvas components:", components);
 
-  console.log('Canvas components:', components);
+  const renderAddComponentDropZone = () => (
+    <div className="mb-4 border-2 border-dashed border-blue-400 rounded-lg p-6 text-center bg-blue-50">
+      <div className="mx-auto h-12 w-12 bg-white rounded-full flex items-center justify-center mb-3 border border-blue-200">
+        <i className="fas fa-plus text-blue-500 text-lg"></i>
+      </div>
+      <h4 className="text-md font-semibold text-blue-700 mb-1">
+        Add a new component here
+      </h4>
+      <p className="text-blue-600 text-sm mb-2">
+        Drag and drop or click to add a new component
+      </p>
+      <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+        <i className="fas fa-plus mr-2"></i>Add Component
+      </button>
+    </div>
+  );
+
   return (
     <div className="flex-1 flex flex-col bg-gray-100 overflow-hidden">
       {!showComponentPanel && (
         <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-r-md p-2 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-r-md p-2 text-gray-500 hover:text-gray-700 cursor-pointer"
           onClick={() => setShowComponentPanel(true)}
         >
           <i className="fas fa-chevron-right"></i>
@@ -37,210 +71,210 @@ const Canvas = ({
       )}
       {!showPropertiesPanel && (
         <button
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-l-md p-2 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-l-md p-2 text-gray-500 hover:text-gray-700 cursor-pointer"
           onClick={() => setShowPropertiesPanel(true)}
         >
           <i className="fas fa-chevron-left"></i>
         </button>
       )}
       <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between">
-        <div className="flex items-center">
-          <span className="text-sm font-medium text-gray-700 mr-3">Canvas:</span>
+        <div className="flex items-center space-x-4">
           <div className="relative">
-            <button className="flex items-center px-3 py-1 bg-gray-100 rounded-md text-sm text-gray-700 hover:bg-gray-200 cursor-pointer !rounded-button whitespace-nowrap">
-              <span>Home Page</span>
-              <i className="fas fa-chevron-down ml-2 text-xs"></i>
+            <button
+              className="flex items-center px-3 py-2 bg-gray-100 rounded-md text-gray-700 hover:bg-gray-200"
+              onClick={() => setIsPageDropdownOpen(!isPageDropdownOpen)}
+            >
+              <span>{currentPage}</span>
+              <i
+                className={`fas fa-chevron-down ml-2 text-xs transition-transform duration-200 ${isPageDropdownOpen ? "transform rotate-180" : ""
+                  }`}
+              ></i>
+            </button>
+            {isPageDropdownOpen && (
+              <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                {pages.map((page) => (
+                  <button
+                    key={page.id}
+                    className={`w-full text-left px-4 py-2 text-sm ${currentPage === page.name
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-gray-700 hover:bg-gray-50"
+                      }`}
+                    onClick={() => handlePageSelect(page.name)}
+                  >
+                    {page.name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="flex items-center space-x-2">
+            <button className="p-2 text-gray-500 hover:text-gray-700">
+              <i className="fas fa-undo"></i>
+            </button>
+            <button className="p-2 text-gray-500 hover:text-gray-700">
+              <i className="fas fa-redo"></i>
+            </button>
+          </div>
+          <div className="flex items-center bg-gray-100 rounded-md p-1">
+            <button
+              className={`p-2 ${previewMode === "desktop"
+                ? "bg-white shadow-sm rounded"
+                : "text-gray-500"
+                }`}
+              onClick={() => setPreviewMode("desktop")}
+            >
+              <i className="fas fa-desktop"></i>
+            </button>
+            <button
+              className={`p-2 ${previewMode === "tablet"
+                ? "bg-white shadow-sm rounded"
+                : "text-gray-500"
+                }`}
+              onClick={() => setPreviewMode("tablet")}
+            >
+              <i className="fas fa-tablet-alt"></i>
+            </button>
+            <button
+              className={`p-2 ${previewMode === "mobile"
+                ? "bg-white shadow-sm rounded"
+                : "text-gray-500"
+                }`}
+              onClick={() => setPreviewMode("mobile")}
+            >
+              <i className="fas fa-mobile-alt"></i>
             </button>
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <button className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md cursor-pointer !rounded-button whitespace-nowrap">
+          <button className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md">
             <i className="fas fa-code mr-1"></i>Code View
           </button>
-          <button className="px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md cursor-pointer !rounded-button whitespace-nowrap">
+          <button className="px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-md">
             <i className="fas fa-eye mr-1"></i>Preview
           </button>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto p-6" onDrop={handleDrop} onDragOver={handleDragOver}>
+
+      <div
+        className="flex-1 overflow-y-auto p-6"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
         <div
-          className={`mx-auto bg-gray-100 rounded-lg transition-all ${previewMode === 'desktop' ? 'max-w-full' : previewMode === 'tablet' ? 'max-w-2xl' : 'max-w-sm'
+          className={`mx-auto bg-gray-100 rounded-lg transition-all ${previewMode === "desktop"
+            ? "max-w-full"
+            : previewMode === "tablet"
+              ? "max-w-2xl"
+              : "max-w-sm"
             }`}
         >
           {canvasComponents.length === 0 ? (
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
-              <div className="mx-auto h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                <i className="fas fa-plus text-gray-400 text-xl"></i>
-              </div>
-              <h3 className="text-lg font-medium text-gray-700 mb-2">Add your first component</h3>
-              <p className="text-gray-500 mb-4">
-                Drag and drop components from the left panel to start building your page
-              </p>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer !rounded-button whitespace-nowrap">
-                <i className="fas fa-plus mr-2"></i>Add Component
-              </button>
-            </div>
+            renderAddComponentDropZone()
           ) : (
             <>
-              {components.map((component) => {
-                switch (component.type) {
-                  case 'Hero Banner':
-                    return (
-                      <div className='mb-4'>
-                        <HeroBanner
-                          key={component.id}
-                          component={component}
+              {components.map((component) => (
+                <React.Fragment key={component.id}>
+                  <div className="mb-4">
+                    {{
+                      HeroSection: (
+                        <Hero
+                          data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          updateComponentContent={updateComponentContent}
+                          view={false}
                         />
-                      </div>
-                    );
-                  case 'Product Grid':
-                    return (
-                      <div className='mb-4'>
-                        <ProductGrid
-                          key={component.id}
-                          component={component}
-                          isSelected={selectedComponent === component.id}
-                          handleComponentSelect={handleComponentSelect}
-                          updateComponentContent={updateComponentContent}
-                        />
-                      </div>
-                    );
-                  case 'Featured Collection':
-                    return (
-                      <div className='mb-4'>
+                      ),
+                      FeaturedCollection: (
                         <FeaturedCollection
-                          key={component.id}
-                          component={component}
+                          data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          updateComponentContent={updateComponentContent}
+                          view={false}
                         />
-                      </div>
-                    );
-                  case 'Product Card':
-                    return (
-                      <div className='mb-4'>
-                        <ProductCard
-                          key={component.id}
-                          component={component}
+                      ),
+                      FeaturedProduct: (
+                        <FeaturedProduct
+                          data={component}
                           isSelected={selectedComponent === component.id}
                           handleComponentSelect={handleComponentSelect}
-                          updateComponentContent={updateComponentContent}
+                          view={false}
                         />
-                      </div>
-                    );
-
-                  case 'Navbar':
-                    return (
-                      <div className='mb-4'>
-                        <NavbarSection
-                          logo={logo}
-                          navItems={navItems}
-                          getNavbarStyle={getNavbarStyle}
-                          getNavItemStyle={getNavItemStyle}
-                          key={component.id}
+                      ),
+                      Footer: (
+                        <>
+                          {renderAddComponentDropZone()}
+                          <Footer
+                            data={component}
+                            isSelected={selectedComponent === component.id}
+                            handleComponentSelect={handleComponentSelect}
+                            view={false}
+                          />
+                        </>
+                      ),
+                      Navbar: (
+                        <>
+                          <Navbar
+                            data={component}
+                            isSelected={selectedComponent === component.id}
+                            handleComponentSelect={handleComponentSelect}
+                            view={false}
+                          />
+                          {/* {renderAddComponentDropZone()} */}
+                        </>
+                      ),
+                      ContactForm: (
+                        <ContactForm
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
-                      </div>
-                    );
-                  default:
-                    return null;
-                }
-              })}
-              {/* <NavbarSection
-                logo={logo}
-                navItems={navItems}
-                getNavbarStyle={getNavbarStyle}
-                getNavItemStyle={getNavItemStyle}
-              /> */}
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center" >
-                <div className="mx-auto h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                  <i className="fas fa-plus text-gray-400 text-xl"></i>
-                </div>
-                <h3 className="text-lg font-medium text-gray-700 mb-2">Add your first component</h3>
-                <p className="text-gray-500 mb-4">
-                  Drag and drop components from the left panel to start building your page
-                </p>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer !rounded-button whitespace-nowrap">
-                  <i className="fas fa-plus mr-2"></i>Add Component
-                </button>
-              </div>
-
-              {/* featured collection component */}
-              {/* <div
-                className={`relative p-8 ${selectedComponent === 'featured-1' ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'
-                  }`}
-                onClick={() => handleComponentSelect('featured-1')}
-              >
-                <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 bg-white rounded shadow p-1">
-                  <button className="p-1 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap">
-                    <i className="fas fa-arrows-alt"></i>
-                  </button>
-                  <button className="p-1 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap">
-                    <i className="fas fa-copy"></i>
-                  </button>
-                  <button className="p-1 text-gray-500 hover:text-red-600 cursor-pointer !rounded-button whitespace-nowrap">
-                    <i className="fas fa-trash"></i>
-                  </button>
-                </div>
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Summer Collection</h2>
-                  <p className="text-gray-600 max-w-2xl mx-auto">
-                    Explore our curated selection of summer essentials designed for comfort and style.
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  {[1, 2, 3, 4].map((item) => (
-                    <div key={item} className="group">
-                      <div className="bg-gray-100 rounded-lg overflow-hidden mb-3 aspect-w-1 aspect-h-1">
-                        <img
-                          src={`https://readdy.ai/api/search-image?query=A%20single%20fashionable%20summer%20clothing%20item%20on%20a%20clean%20light%20gray%20background%2C%20professional%20product%20photography%20with%20soft%20shadows%2C%20detailed%20fabric%20texture%20visible%2C%20minimalist%20styling%20for%20e-commerce%20website&width=300&height=300&seq=${item + 5}&orientation=squarish`}
-                          alt={`Product ${item}`}
-                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                      ),
+                      PreFooterEmailSignup: (
+                        <PreFooterEmailSignup
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          view={false}
                         />
-                      </div>
-                      <h3 className="font-medium text-gray-900 mb-1">Summer Essential #{item}</h3>
-                      <p className="text-gray-600 mb-2">$59.99</p>
-                      <button className="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md text-sm font-medium cursor-pointer !rounded-button whitespace-nowrap">
-                        Add to Cart
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
+                      ),
+                      ProductHighlight: (
+                        <ProductHighlight
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          view={false}
+                        />
+                      ),
+                      SplitFeatureSection: (
+                        <SplitFeatureSection
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          view={false}
+                        />
+                      ),
+                      ImageWithTextSection: (
+                        <ImageWithTextSection
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          view={false}
+                        />
+                      ),
+                      MultimediaCollage: (
+                        <MultimediaCollage
+                          data={component}
+                          isSelected={selectedComponent === component.id}
+                          handleComponentSelect={handleComponentSelect}
+                          view={false}
+                        />
+                      ),
+                    }[component.component] || null}
+                  </div>
 
-              {/* about us component */}
-              {/* <div
-                className={`relative p-8 ${selectedComponent === 'text-1' ? 'ring-2 ring-blue-500 ring-offset-2' : 'hover:outline hover:outline-gray-200'
-                  }`}
-                onClick={() => handleComponentSelect('text-1')}
-              >
-                <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 bg-white rounded shadow p-1">
-                  <button className="p-1 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap">
-                    <i className="fas fa-arrows-alt"></i>
-                  </button>
-                  <button className="p-1 text-gray-500 hover:text-gray-700 cursor-pointer !rounded-button whitespace-nowrap">
-                    <i className="fas fa-copy"></i>
-                  </button>
-                  <button className="p-1 text-gray-500 hover:text-red-600 cursor-pointer !rounded-button whitespace-nowrap">
-                    <i className="fas fa-trash"></i>
-                  </button>
-                </div>
-                <div className="max-w-3xl mx-auto text-center">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">About Our Brand</h2>
-                  <p className="text-lg text-gray-600 mb-6">
-                    Founded in 2020, our brand focuses on creating high-quality, sustainable fashion that stands the test of time. We believe in ethical manufacturing and using eco-friendly materials.
-                  </p>
-                  <p className="text-lg text-gray-600 mb-8">
-                    Each piece in our collection is carefully designed and crafted to ensure comfort, style, and durability. We're committed to reducing our environmental footprint while delivering exceptional products.
-                  </p>
-                  <button className="px-6 py-3 bg-gray-900 text-white font-medium rounded-md hover:bg-gray-800 cursor-pointer !rounded-button whitespace-nowrap">
-                    Learn More About Us
-                  </button>
-                </div>
-              </div> */}
+                </React.Fragment>
+              ))}
             </>
           )}
         </div>
