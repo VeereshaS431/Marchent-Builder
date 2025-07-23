@@ -16,6 +16,7 @@ import Analytics from "./pages/Analytics/Analytics";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Builder from "./pages/Builder/Builder";
 import Settings from "./pages/Settings/Settings";
+// import PageGenerator from "./pages/PageGenerator/PageGenerator";
 
 
 
@@ -27,10 +28,11 @@ const App = () => {
   const [previewMode, setPreviewMode] = useState("desktop");
   const [selectedTheme, setSelectedTheme] = useState(null);
   const [userPages, setUserPages] = useState([
-    { id: "home", name: "Home", path: "/", isPublished: false },
+    { id: "home", name: "Home", path: "/home", isPublished: false },
     { id: "products", name: "Products", path: "/products", isPublished: false },
     { id: "about", name: "About", path: "/about", isPublished: false },
     { id: "contact", name: "Contact", path: "/contact", isPublished: false },
+    { id: "blog", name: "Blogs", path: "/blogs", isPublished: false },
   ]);
   const [isPageDropdownOpen, setIsPageDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("Home");
@@ -272,7 +274,7 @@ const App = () => {
     ],
     Contact: [],
   });
-
+  console.log(allPageComponents, "alll")
   const handlePageChange = (e) => {
     const selectedId = e.target.value;
     setCurrentPage(selectedId);
@@ -365,7 +367,7 @@ const App = () => {
       [currentPage]: components,
     }));
   }, [components, currentPage]);
-
+  const shopname = "veeresh"
   return (
     <DataShare.Provider
       value={{
@@ -419,6 +421,19 @@ const App = () => {
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/products" element={<div>Products Page</div>} />
             <Route path="/settings" element={<Settings />} />
+
+            {
+              userPages.map((page) => {
+                // if()
+                console.log("Rendering Route:", `/${shopname}${page.path}`, page.id);
+                let pageName = page.name
+                console.log(allPageComponents[pageName], "components")
+                return (
+                  <Route path={`${shopname}${page.path}`} element={""} />
+                  // <PageGenerator components={allPageComponents[pageName]} />
+                )
+              })
+            }
           </Routes>
         </div>
       </Router>
