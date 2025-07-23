@@ -15,154 +15,82 @@ export default function PageGenerator({ components }) {
     console.log(components, "from pages")
     return (
         <div>
-            {components?.map((component) => {
-                switch (component?.component) {
-                    case "HeroSection":
-                        return (
-                            <div className="mb-4">
-                                <Hero
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                />
-                            </div>
-                        );
-                    case "FeaturedCollection":
-                        return (
-                            <div className="mb-4">
-                                <FeaturedCollection
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                />
-                            </div>
-                        );
-                    case "FeaturedProduct":
-                        return (
-                            <div className="mb-4">
-                                <FeaturedProduct
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
-                                />
-                            </div>
-                        );
-                    case "Footer":
-                        return (
-                            <div className="mb-4">
+            {components.map((component) => (
+                <React.Fragment key={component.id}>
+                    {{
+                        HeroSection: (
+                            <Hero
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        FeaturedCollection: (
+                            <FeaturedCollection
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        FeaturedProduct: (
+                            <FeaturedProduct
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        Footer: (
+                            <>
                                 <Footer
-                                    key={component.id}
                                     data={component}
                                     view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
                                 />
-                            </div>
-                        );
-
-                    case "Navbar":
-                        return (
-                            <div className="mb-4">
+                            </>
+                        ),
+                        Navbar: (
+                            <>
                                 <Navbar
-                                    key={component.id}
                                     data={component}
                                     view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
                                 />
-                            </div>
-                        );
-                    case "ContactForm":
-                        return (
-                            <div className="mb-4">
-                                <ContactForm
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
-                                />
-                            </div>
-                        );
-                    case "PreFooterEmailSignup":
-                        return (
-                            <div className="mb-4">
-                                <PreFooterEmailSignup
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
-                                />
-                            </div>
-                        );
-                    case "ProductHighlight":
-                        return (
-                            <div className="mb-4">
-                                <ProductHighlight
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
-                                />
-                            </div>
-                        );
-                    case "SplitFeatureSection":
-                        return (
-                            <div className="mb-4">
-                                <SplitFeatureSection
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
-                                />
-                            </div>
-                        );
-                    case "ImageWithTextSection":
-                        return (
-                            <div className="mb-4">
-                                <ImageWithTextSection
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                //     isSelected={selectedComponent === component.id}
-                                //     handleComponentSelect={handleComponentSelect}
-                                // // updateComponentContent={updateComponentContent}
-                                />
-                            </div>
-                        );
-                    case "MultimediaCollage":
-                        return (
-                            <div className="mb-4">
-                                <MultimediaCollage
-                                    key={component.id}
-                                    data={component}
-                                    view={true}
-                                // isSelected={selectedComponent === component.id}
-                                // handleComponentSelect={handleComponentSelect}
-                                // updateComponentContent={updateComponentContent}
-                                />
-                            </div>
-                        );
-                    default:
-                        return null;
-                }
-            })}
+                            </>
+                        ),
+                        ContactForm: (
+                            <ContactForm
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        PreFooterEmailSignup: (
+                            <PreFooterEmailSignup
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        ProductHighlight: (
+                            <ProductHighlight
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        SplitFeatureSection: (
+                            <SplitFeatureSection
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        ImageWithTextSection: (
+                            <ImageWithTextSection
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                        MultimediaCollage: (
+                            <MultimediaCollage
+                                data={component}
+                                view={true}
+                            />
+                        ),
+                    }[component.component] || null}
+                </React.Fragment>
+            ))}
         </div>
     )
 }
